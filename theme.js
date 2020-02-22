@@ -22,7 +22,10 @@ export default {
     Card: {
         containerStyle: {
             // raised: true,
-            margin: 10,
+            marginTop: 20,
+            marginBottom: 20,
+            marginLeft: 0,
+            marginRight: 0,
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,

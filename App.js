@@ -37,10 +37,6 @@ export default function App(props) {
 
 async function loadResourcesAsync() {
   await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-    ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
@@ -48,6 +44,30 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       'roboto-light': require('./assets/fonts/Roboto-Light.ttf'),
     }),
+    Asset.loadAsync([
+      require('./assets/images/account.png'),
+      require('./assets/images/credit-card.png'),
+      require('./assets/images/alarm.png'),
+      require('./assets/images/wallet.png'),
+      require('./assets/images/support.png'),
+      require('./assets/images/privacy.png'),
+      require('./assets/images/faq.png'),
+      require('./assets/images/logout.png'),
+      require('./assets/images/babyshower1.jpg'),
+      require('./assets/images/user2.jpg'),
+      require('./assets/images/engagement2.jpg'),
+      require('./assets/images/user3.jpg'),
+      require('./assets/images/housewarming4.jpg'),
+      require('./assets/images/user4.jpg'),
+      require('./assets/images/gamenight1.jpg'),
+      require('./assets/images/nyp3.jpg'),
+      require('./assets/images/user5.jpg'),
+      require('./assets/images/user6.jpg'),
+      require('./assets/images/babyshower3.jpg'),
+      require('./assets/images/user7.jpg'),
+      require('./assets/images/engagement3.jpg'),
+      require('./assets/images/user8.jpg'),
+    ])
   ]);
 }
 
@@ -63,6 +83,8 @@ function handleFinishLoading(setLoadingComplete) {
 
 const styles = StyleSheet.create({
   container: {
+    marginLeft: -1,
+    marginRight: -1,
     flex: 1,
     backgroundColor: '#fff',
   },
