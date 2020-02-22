@@ -6,7 +6,7 @@ export default {
         },
         primary: {
             backgroundColor: "#c4157e",
-            borderRadius: 50,
+            borderRadius: 20,
             paddingLeft: 20,
             paddingRight: 20,
             marginLeft: 0,
