@@ -2,7 +2,7 @@ import React from 'react';
 import { ListItem, } from 'react-native-elements'
 import { FlatList } from 'react-native'
 
-const list = [
+const accountList = [
   {
     name: 'Profile',
     avatar_url: require('../assets/images/account.png'),
@@ -42,9 +42,9 @@ const list = [
   },
 ]
 
-keyExtractor = (item, index) => index.toString()
+const keyExtractor = (item, index) => index.toString()
 
-renderItem = ({ item }) => (
+const renderItem = ({ item }) => (
   <ListItem
     title={item.name}
     subtitle={item.subtitle}
@@ -63,9 +63,9 @@ export default function SettingsScreen() {
    */
   return (
     <FlatList
-      keyExtractor={this.keyExtractor}
-      data={list}
-      renderItem={this.renderItem}
+      keyExtractor={keyExtractor}
+      data={accountList}
+      renderItem={renderItem}
     />
   );
 }

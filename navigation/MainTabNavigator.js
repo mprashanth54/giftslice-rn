@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import NotificationScreen from '../screens/NotificationScreen'
 import SettingsScreen from '../screens/SettingsScreen';
 import * as theme from '../theme'
 
@@ -25,11 +26,18 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarOptions: {
+    // style: {
+    //   height: 57,
+    //   justifyContent: 'center',
+    //   alignItems: 'stretch',
+    //   padding: 10
+    // },
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black'
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
+      size={10}
       focused={focused}
       name={'home'}
     />
@@ -41,7 +49,7 @@ HomeStack.path = '';
 
 const NotificationStack = createStackNavigator(
   {
-    Notification: LinksScreen,
+    Notification: NotificationScreen,
   },
   config
 );
@@ -49,11 +57,18 @@ const NotificationStack = createStackNavigator(
 NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
   tabBarOptions: {
+    // style: {
+    //   height: 57,
+    //   justifyContent: 'center',
+    //   alignItems: 'stretch',
+    //   padding: 10
+    // },
     activeTintColor: theme.default.colors.primary,
-    inactiveTintColor: 'black'
+    inactiveTintColor: 'black',
+
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'notifications-active'} />
+    <TabBarIcon focused={focused} size={10} name={'notifications-active'} />
   ),
 };
 
@@ -71,11 +86,17 @@ const AddStack = createStackNavigator(
 AddStack.navigationOptions = {
   tabBarLabel: 'New',
   tabBarOptions: {
+    // style: {
+    //   height: 57,
+    //   justifyContent: 'center',
+    //   alignItems: 'stretch',
+    //   padding: 10
+    // },
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black'
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'add-box'} />
+    <TabBarIcon focused={focused} size={10} name={'add-box'} />
   ),
 };
 
@@ -94,11 +115,17 @@ const CampaignStack = createStackNavigator(
 CampaignStack.navigationOptions = {
   tabBarLabel: 'My Registry',
   tabBarOptions: {
+    // style: {
+    //   height: 57,
+    //   justifyContent: 'center',
+    //   alignItems: 'stretch',
+    //   padding: 10
+    // },
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black'
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'shopping-basket'} />
+    <TabBarIcon focused={focused} size={10} name={'shopping-basket'} />
   ),
 };
 
@@ -117,12 +144,27 @@ SettingsStack.navigationOptions = {
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black'
   },
+
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'person'} />
+    <TabBarIcon focused={focused} size={10} name={'person'} />
   ),
 };
 
 SettingsStack.path = '';
+
+// initial = {
+//   initialRouteName: 'Home',
+//   tabStyle: {
+//     width: 200,
+//   },
+//   tabBarOptions: {
+//     style: {
+//       height: 400,
+//     },
+//     showIcon: true,
+//     showLabel: false,
+//   }
+// }
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
@@ -133,5 +175,4 @@ const tabNavigator = createBottomTabNavigator({
 });
 
 tabNavigator.path = '';
-
 export default tabNavigator;
