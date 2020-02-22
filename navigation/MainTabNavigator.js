@@ -92,7 +92,7 @@ const CampaignStack = createStackNavigator(
 );
 
 CampaignStack.navigationOptions = {
-  tabBarLabel: 'Campaign',
+  tabBarLabel: 'My Registry',
   tabBarOptions: {
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black'
