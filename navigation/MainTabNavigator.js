@@ -7,6 +7,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import * as theme from '../theme'
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -22,35 +24,85 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
+  tabBarOptions: {
+    activeTintColor: theme.default.colors.primary,
+    inactiveTintColor: 'black'
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={'home'}
     />
   ),
 };
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+
+const NotificationStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Notification: LinksScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+NotificationStack.navigationOptions = {
+  tabBarLabel: 'Notifications',
+  tabBarOptions: {
+    activeTintColor: theme.default.colors.primary,
+    inactiveTintColor: 'black'
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={'notifications-active'} />
   ),
 };
 
-LinksStack.path = '';
+NotificationStack.path = '';
+
+
+
+const AddStack = createStackNavigator(
+  {
+    Add: LinksScreen,
+  },
+  config
+);
+
+AddStack.navigationOptions = {
+  tabBarLabel: 'New',
+  tabBarOptions: {
+    activeTintColor: theme.default.colors.primary,
+    inactiveTintColor: 'black'
+  },
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={'add-box'} />
+  ),
+};
+
+AddStack.path = '';
+
+
+
+
+const CampaignStack = createStackNavigator(
+  {
+    Campaign: LinksScreen,
+  },
+  config
+);
+
+CampaignStack.navigationOptions = {
+  tabBarLabel: 'Campaign',
+  tabBarOptions: {
+    activeTintColor: theme.default.colors.primary,
+    inactiveTintColor: 'black'
+  },
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={'shopping-basket'} />
+  ),
+};
+
+CampaignStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -60,9 +112,13 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Me',
+  tabBarOptions: {
+    activeTintColor: theme.default.colors.primary,
+    inactiveTintColor: 'black'
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={'person'} />
   ),
 };
 
@@ -70,7 +126,9 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  NotificationStack,
+  AddStack,
+  CampaignStack,
   SettingsStack,
 });
 
