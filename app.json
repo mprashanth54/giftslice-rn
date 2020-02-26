@@ -4,6 +4,7 @@
     "slug": "giftslice",
     "privacy": "public",
     "sdkVersion": "36.0.0",
+    "backgroundColor": "#ffffff",
     "platforms": [
       "ios",
       "android",

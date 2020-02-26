@@ -40,28 +40,17 @@ export default {
     colors: {
         primary: "#c4157e",
         secondary: "#E8249A",
-        // grey0;
-        // grey1;
-        // grey2;
-        // grey3;
-        // grey4;
-        // grey5;
-        // greyOutline;
-        // searchBg;
-        // success;
-        // error;
-        // warning;
-        // divider;
-        // platform: {
-        //   ios: {
-        //     primary;
-        //     secondary;
-        //     success;
-        //     error;
-        //     warning;
-        //   };
-        //   android: {
-        //     // Same as ios
-        //   };
+        grey0: '#393e42',
+        grey1: '#43484d',
+        grey2: '#5e6977',
+        grey3: '#86939e',
+        grey4: '#bdc6cf',
+        grey5: '#e1e8ee',
+        dkGreyBg: '#232323',
+        greyOutline: '#bbb',
+        searchBg: '#303337',
+        disabled: '#dadee0',
+        white: '#ffffff',
+        error: '#ff190c',
     }
 }

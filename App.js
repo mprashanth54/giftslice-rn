@@ -67,6 +67,13 @@ async function loadResourcesAsync() {
       require('./assets/images/user7.jpg'),
       require('./assets/images/engagement3.jpg'),
       require('./assets/images/user8.jpg'),
+      require('./assets/images/p1.jpeg'),
+      require('./assets/images/p2.jpeg'),
+      require('./assets/images/p3.jpeg'),
+      require('./assets/images/p4.jpeg'),
+      require('./assets/images/p5.jpeg'),
+      require('./assets/images/p6.jpeg'),
+      require('./assets/images/paypal.png'),
     ])
   ]);
 }
