@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -8,7 +8,11 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import NotificationScreen from '../screens/NotificationScreen'
 import SettingsScreen from '../screens/SettingsScreen';
+import MyWishListScreen from '../screens/MyWishList'
+import EditWishListScreen from '../screens/EditWishList'
 import * as theme from '../theme'
+import { Text } from 'react-native-elements'
+// import AddWishList from '../screens/AddWishList'
 
 
 const config = Platform.select({
@@ -33,11 +37,11 @@ HomeStack.navigationOptions = {
     //   padding: 10
     // },
     activeTintColor: theme.default.colors.primary,
-    inactiveTintColor: 'black'
+    inactiveTintColor: 'black',
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
-      size={10}
       focused={focused}
       name={'home'}
     />
@@ -65,10 +69,11 @@ NotificationStack.navigationOptions = {
     // },
     activeTintColor: theme.default.colors.primary,
     inactiveTintColor: 'black',
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
 
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} size={10} name={'notifications-active'} />
+    <TabBarIcon focused={focused} name={'notifications-active'} />
   ),
 };
 
@@ -93,10 +98,11 @@ AddStack.navigationOptions = {
     //   padding: 10
     // },
     activeTintColor: theme.default.colors.primary,
-    inactiveTintColor: 'black'
+    inactiveTintColor: 'black',
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} size={10} name={'add-box'} />
+    <TabBarIcon focused={focused} name={'add-box'} />
   ),
 };
 
@@ -107,13 +113,14 @@ AddStack.path = '';
 
 const CampaignStack = createStackNavigator(
   {
-    Campaign: LinksScreen,
+    Campaign: MyWishListScreen,
+    // Campaign: EditWishListScreen
   },
   config
 );
 
 CampaignStack.navigationOptions = {
-  tabBarLabel: 'My Registry',
+  tabBarLabel: 'My Wishlist',
   tabBarOptions: {
     // style: {
     //   height: 57,
@@ -122,10 +129,11 @@ CampaignStack.navigationOptions = {
     //   padding: 10
     // },
     activeTintColor: theme.default.colors.primary,
-    inactiveTintColor: 'black'
+    inactiveTintColor: 'black',
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} size={10} name={'shopping-basket'} />
+    <TabBarIcon focused={focused} name={'shopping-basket'} />
   ),
 };
 
@@ -142,11 +150,12 @@ SettingsStack.navigationOptions = {
   tabBarLabel: 'Me',
   tabBarOptions: {
     activeTintColor: theme.default.colors.primary,
-    inactiveTintColor: 'black'
+    inactiveTintColor: 'black',
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
   },
 
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} size={10} name={'person'} />
+    <TabBarIcon focused={focused} name={'person'} />
   ),
 };
 
@@ -172,6 +181,10 @@ const tabNavigator = createBottomTabNavigator({
   AddStack,
   CampaignStack,
   SettingsStack,
+}, {
+  tabBarOptions: {
+    style: { height: Platform.OS === 'android' ? 55 : 60 }
+  }
 });
 
 tabNavigator.path = '';

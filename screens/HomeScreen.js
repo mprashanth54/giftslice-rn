@@ -116,7 +116,7 @@ const campaignContent = (props) => {
               }}
               color={theme.default.Button.primaryColor}
               buttonStyle={theme.default.Button.primary}
-              title='$ Contribute Now' />
+              title='$ Contribute' />
           </View>
         </View>
       </Card >
@@ -179,11 +179,10 @@ const styles = StyleSheet.create({
     right: 0,
     ...Platform.select({
       ios: {
-        elevation: 20,
-        // shadowColor: 'black',
-        // shadowOffset: { width: 0, height: -3 },
-        // shadowOpacity: 0.1,
-        // shadowRadius: 3,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
       },
       android: {
         elevation: 20,
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   tabBarInfoText: {
-    fontSize: 24,
+    fontSize: 17,
     color: 'rgba(96,100,109, 1)',
     textAlign: 'center',
   },
