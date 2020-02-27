@@ -12,6 +12,7 @@ import MyWishListScreen from '../screens/MyWishList'
 import EditWishListScreen from '../screens/EditWishList'
 import * as theme from '../theme'
 import { Text } from 'react-native-elements'
+import AddWishList from '../screens/AddWishList';
 // import AddWishList from '../screens/AddWishList'
 
 
@@ -48,7 +49,7 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+HomeStack.path = 'Home';
 
 
 const NotificationStack = createStackNavigator(
@@ -77,13 +78,13 @@ NotificationStack.navigationOptions = {
   ),
 };
 
-NotificationStack.path = '';
+NotificationStack.path = 'Notification';
 
 
 
 const AddStack = createStackNavigator(
   {
-    Add: LinksScreen,
+    Add: AddWishList,
   },
   config
 );
@@ -106,7 +107,7 @@ AddStack.navigationOptions = {
   ),
 };
 
-AddStack.path = '';
+AddStack.path = 'Add';
 
 
 
@@ -137,7 +138,7 @@ CampaignStack.navigationOptions = {
   ),
 };
 
-CampaignStack.path = '';
+CampaignStack.path = 'Wishlist';
 
 const SettingsStack = createStackNavigator(
   {
@@ -159,7 +160,7 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-SettingsStack.path = '';
+SettingsStack.path = 'Me';
 
 // initial = {
 //   initialRouteName: 'Home',

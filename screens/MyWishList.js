@@ -160,6 +160,7 @@ export default class MyWishListScreen extends React.Component {
                                         <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
                                             <Input
                                                 ref={pay}
+                                                keyboardType='numeric'
                                                 containerStyle={{ marginTop: 20, marginBottom: 10, }}
                                                 inputContainerStyle={{ paddingBottom: 10, borderBottomColor: 'transparent' }}
                                                 inputStyle={{ marginLeft: 10 }}
@@ -231,7 +232,6 @@ export default class MyWishListScreen extends React.Component {
                                                     }}
                                                     color={theme.default.Button.primaryColor}
                                                     buttonStyle={theme.default.Button.primary}
-                                                    onPress={(e) => { this.RBSheet.open() }}
                                                     title='Pay' />
                                             </View>
                                         </View>
@@ -283,7 +283,7 @@ export default class MyWishListScreen extends React.Component {
                         </Text>
                             </View>
                         </View>
-                        <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', marginBottom: 10 }}>
+                        <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', marginBottom: 10, marginTop: 10 }}>
                             <Slider
                                 value={(total - needed) / total}
                                 animateTransitions={true}
