@@ -74,6 +74,7 @@ async function loadResourcesAsync() {
       require('./assets/images/p5.jpeg'),
       require('./assets/images/p6.jpeg'),
       require('./assets/images/paypal.png'),
+      require('./assets/images/tick.png'),
     ])
   ]);
 }
