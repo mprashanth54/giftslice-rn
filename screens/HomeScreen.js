@@ -178,14 +178,12 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           {this.searchBar()}
           {this.campaignContent()}
-          {this.viewScreen()}
         </ScrollView>
       </View>
     )
   }
 
   handleBackPress() {
-    console.log("I'm here", this.state)
     if (this.state.view) {
       this.updateView()
       return true
