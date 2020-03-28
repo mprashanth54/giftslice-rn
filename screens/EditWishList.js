@@ -141,7 +141,7 @@ export default function EditWishListScreen({ navigation }) {
     console.log(navigation)
     const [needed, total] = getAmount()
     return (
-        <View style={{ flexDirecttion: 'column', flex: 1 }}>
+        <View style={{ flexDirection: 'column', flex: 1 }}>
             <ScrollView keyboardShouldPersistTaps="always" nestedScrollEnabled={true} >
                 <Tile
                     // containerStyle={{ margin: 0, padding: 0 }}
