@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import { Button } from "react-native-elements";
-import Auth from "../stores/auth";
 import styles from "./style";
 
 export default class NewAccount extends React.Component {
@@ -20,7 +19,12 @@ export default class NewAccount extends React.Component {
 
   async signup() {
     // send email verification
-    this.props.navigation.navigate("VerifyEmail");
+    this.props.navigation.navigate("VerifyAccount");
+  }
+
+  async goToLogin() {
+    // send email verification
+    this.props.navigation.navigate("Login");
   }
 
   render() {
@@ -63,7 +67,9 @@ export default class NewAccount extends React.Component {
                 onPress={() => this.signup()}
                 title="Sign Up"
               />
-              <Text>Already have an account? Sign in.</Text>
+              <Text onPress={() => this.goToLogin()}>
+                Already have an account? Sign in here.
+              </Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
