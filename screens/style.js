@@ -6,31 +6,41 @@ export default {
   containerView: {
     flex: 1
   },
+  header: {
+    fontSize: 25,
+    textAlign: "center",
+    marginTop: 50,
+    marginBottom: 30,
+    fontWeight: "bold"
+  },
   loginScreenContainer: {
+    backgroundColor: "#e1e8ee",
     flex: 1
   },
+  logo: {
+    fontSize: 20,
+    marginBottom: 30,
+    textAlign: "center"
+  },
   logoText: {
-    fontSize: 40,
-    fontWeight: "800",
+    fontSize: 50,
+    fontWeight: "500",
     marginTop: 150,
     marginBottom: 30,
     textAlign: "center"
   },
-  loginFormView: {
-    flex: 1
-  },
   loginFormTextInput: {
-    height: 43,
+    height: 45,
     fontSize: 14,
-    borderRadius: 5,
+    borderRadius: 2,
     borderWidth: 1,
     borderColor: "#eaeaea",
     backgroundColor: "#fafafa",
     paddingLeft: 10,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 1
   },
   loginButton: {
     backgroundColor: "#3897f1",
@@ -45,5 +55,15 @@ export default {
     backgroundColor: "#3897f1",
     marginTop: 10,
     marginBottom: 10
+  },
+  footer: {
+    position: "absolute",
+    height: 70,
+    left: 0,
+    bottom: 20
+  },
+  tinyLogoImage: {
+    width: 70,
+    height: 70
   }
 };
