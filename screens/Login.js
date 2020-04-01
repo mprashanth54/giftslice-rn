@@ -13,7 +13,7 @@ import { observer } from "mobx-react";
 import Auth from "../stores/auth";
 import styles from "./style";
 
-const appID = "12345678"; // TODO: need to get for Facebook login
+const appID = "624136824831258"; // TODO: need to get for Facebook login
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -81,11 +81,6 @@ export default class LoginScreen extends React.Component {
               />
               <Text onPress={() => this.fblogin()}>Sign in with Facebook</Text>
             </View>
-            <Text style={styles.footer}>
-              {" "}
-              By continuing to use GiftSlice, you agree to the Giftslice terms
-              and privacy policy.
-            </Text>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
