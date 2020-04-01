@@ -75,11 +75,13 @@ export default class LoginScreen extends React.Component {
                 title="Log In"
               />
               <Button
-                buttonStyle={styles.fbLoginButton}
+                buttonStyle={styles.loginButton}
                 onPress={() => this.signup()}
                 title="Create a New Account"
               />
-              <Text onPress={() => this.fblogin()}>Sign in with Facebook</Text>
+              <Text style={styles.fbLoginButton} onPress={() => this.fblogin()}>
+                Continue with Facebook
+              </Text>
             </View>
           </View>
         </TouchableWithoutFeedback>

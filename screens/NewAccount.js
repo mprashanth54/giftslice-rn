@@ -67,7 +67,7 @@ export default class NewAccount extends React.Component {
                 onPress={() => this.signup()}
                 title="Sign Up"
               />
-              <Text onPress={() => this.goToLogin()}>
+              <Text style={{ fontSize: 16 }} onPress={() => this.goToLogin()}>
                 Already have an account? Sign in here.
               </Text>
             </View>

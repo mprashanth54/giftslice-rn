@@ -24,7 +24,7 @@ import moment from "moment";
 const Form = t.form.Form;
 
 const basicEventDetails = t.struct({
-  eventName: t.maybe(t.String)
+  eventName: t.String
   // endDate: t.maybe(t.Date),
 });
 
@@ -124,12 +124,8 @@ export default class AddWishList extends React.Component {
           alignItems: "center"
         }}
       >
-        <Text
-          style={{ fontFamily: "roboto-light", fontSize: 24, marginBottom: 15 }}
-        >
-          Set Event Title
-        </Text>
-        <View style={{ width: 300 }}>
+        <Text style={styles.logoText}>What's the occasion?</Text>
+        <View style={{ width: 400, height: 100 }}>
           <Form ref="form" type={basicEventDetails} options={options} />
         </View>
         <Button
@@ -137,7 +133,7 @@ export default class AddWishList extends React.Component {
             <Icon
               name="arrow-right"
               type="font-awesome"
-              size={36}
+              size={28}
               color={theme.default.colors.grey2}
             />
           }
@@ -158,23 +154,32 @@ export default class AddWishList extends React.Component {
     );
   }
 
+  async createGift() {
+    //go to create custom gift screen
+    // this.props.navigation.navigate("createGift");
+    console.log("createGift()");
+  }
+
   getGiftScreen() {
     return (
       <View style={{ margin: 10, marginTop: 40, alignItems: "center" }}>
         <Text
           style={{ fontFamily: "roboto-light", fontSize: 24, marginBottom: 15 }}
         >
-          Select One or More Gifts
+          Add your first gift to the event.
         </Text>
         <View style={{ minWidth: 350 }}>
           <Form ref="form2" type={giftDetails} options={options} />
         </View>
+        <Text style={styles.fbLoginButton} onPress={() => this.createGift()}>
+          Create custom gift instead.
+        </Text>
         <Button
           icon={
             <Icon
               name="arrow-right"
               type="font-awesome"
-              size={36}
+              size={28}
               color={theme.default.colors.grey2}
             />
           }
@@ -542,7 +547,6 @@ export default class AddWishList extends React.Component {
 
   goToHome() {
     this.reinitialize();
-
     this.props.navigation.navigate("Home");
   }
 
@@ -644,5 +648,18 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 60
+  },
+  logoText: {
+    fontSize: 30,
+    marginBottom: 30,
+    textAlign: "center"
+  },
+  fbLoginButton: {
+    fontSize: 20,
+    height: 45,
+    backgroundColor: "transparent",
+    color: "#3897f1",
+    marginBottom: 10,
+    textAlign: "left"
   }
 });
