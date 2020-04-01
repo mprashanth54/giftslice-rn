@@ -1,48 +1,48 @@
-import React from 'react';
-import { ListItem, } from 'react-native-elements'
-import { FlatList } from 'react-native'
+import React from "react";
+import { ListItem } from "react-native-elements";
+import { FlatList } from "react-native";
 
 const accountList = [
   {
-    name: 'Profile',
-    avatar_url: require('../assets/images/account.png'),
-    subtitle: 'John Doe'
+    name: "Profile",
+    avatar_url: require("../assets/images/account.png"),
+    subtitle: "John Doe"
   },
   {
-    name: 'Payment Cards',
-    avatar_url: require('../assets/images/credit-card.png'),
-    subtitle: 'Venmo, Google Pay, Credit & Debit cards'
+    name: "Payment Cards",
+    avatar_url: require("../assets/images/credit-card.png"),
+    subtitle: "Venmo, Google Pay, Credit & Debit cards"
   },
   {
-    name: 'Notifications',
-    avatar_url: require('../assets/images/alarm.png'),
-    subtitle: 'Push & SMS'
+    name: "Notifications",
+    avatar_url: require("../assets/images/alarm.png"),
+    subtitle: "Push & SMS"
   },
   {
-    name: 'Wallet',
-    avatar_url: require('../assets/images/wallet.png'),
-    subtitle: '$6.52'
+    name: "Wallet",
+    avatar_url: require("../assets/images/wallet.png"),
+    subtitle: "$6.52"
   },
   {
-    name: 'Support',
-    avatar_url: require('../assets/images/support.png'),
+    name: "Support",
+    avatar_url: require("../assets/images/support.png")
   },
   {
-    name: 'Privacy',
-    avatar_url: require('../assets/images/privacy.png'),
-    subtitle: 'Choose what data to share'
+    name: "Privacy",
+    avatar_url: require("../assets/images/privacy.png"),
+    subtitle: "Choose what data to share"
   },
   {
-    name: 'Frequently Asked Questions',
-    avatar_url: require('../assets/images/faq.png'),
+    name: "Frequently Asked Questions",
+    avatar_url: require("../assets/images/faq.png")
   },
   {
-    name: 'Log Out',
-    avatar_url: require('../assets/images/logout.png')
-  },
-]
+    name: "Log Out",
+    avatar_url: require("../assets/images/logout.png")
+  }
+];
 
-const keyExtractor = (item, index) => index.toString()
+const keyExtractor = (item, index) => index.toString();
 
 const renderItem = ({ item }) => (
   <ListItem
@@ -54,7 +54,7 @@ const renderItem = ({ item }) => (
     bottomDivider
     chevron
   />
-)
+);
 
 export default function SettingsScreen() {
   /**
@@ -71,5 +71,5 @@ export default function SettingsScreen() {
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'Account',
+  title: "Account"
 };

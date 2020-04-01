@@ -13,10 +13,10 @@ export default createAppContainer(
     {
       // You could add another route here for authentication.
       // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+      Main: MainTabNavigator,
       Login: LoginScreen,
       NewAccount: NewAccount,
-      VerifyAccount: VerifyAccount,
-      Main: MainTabNavigator
+      VerifyAccount: VerifyAccount
       // New: AddWishListNavigator
     },
     {
