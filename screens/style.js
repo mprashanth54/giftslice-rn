@@ -50,10 +50,11 @@ export default {
     marginBottom: 10
   },
   fbLoginButton: {
+    fontSize: 20,
     height: 45,
     marginTop: 10,
-    backgroundColor: "#3897f1",
-    marginTop: 10,
+    backgroundColor: "transparent",
+    color: "#3897f1",
     marginBottom: 10
   },
   footer: {
