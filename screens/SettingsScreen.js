@@ -1,73 +1,174 @@
-import React from "react";
-import { ListItem } from "react-native-elements";
-import { FlatList } from "react-native";
+import React, { PureComponent } from "react";
+import {
+  Button,
+  Header,
+  Icon,
+  Text,
+  ListItem,
+  Image
+} from "react-native-elements";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+  Platform,
+  FlatList
+} from "react-native";
+import * as theme from "../theme";
 
-const accountList = [
-  {
-    name: "Profile",
-    avatar_url: require("../assets/images/account.png"),
-    subtitle: "John Doe"
-  },
-  {
-    name: "Payment Cards",
-    avatar_url: require("../assets/images/credit-card.png"),
-    subtitle: "Venmo, Google Pay, Credit & Debit cards"
-  },
-  {
-    name: "Notifications",
-    avatar_url: require("../assets/images/alarm.png"),
-    subtitle: "Push & SMS"
-  },
-  {
-    name: "Wallet",
-    avatar_url: require("../assets/images/wallet.png"),
-    subtitle: "$6.52"
-  },
-  {
-    name: "Support",
-    avatar_url: require("../assets/images/support.png")
-  },
-  {
-    name: "Privacy",
-    avatar_url: require("../assets/images/privacy.png"),
-    subtitle: "Choose what data to share"
-  },
-  {
-    name: "Frequently Asked Questions",
-    avatar_url: require("../assets/images/faq.png")
-  },
-  {
-    name: "Log Out",
-    avatar_url: require("../assets/images/logout.png")
+export default class SettingsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      current: "Account",
+      accountList: [
+        {
+          name: "Profile",
+          avatar_url: require("../assets/images/account.png"),
+          subtitle: "John Doe",
+          screenName: "profileSettings"
+        },
+        {
+          name: "Payment Methods",
+          avatar_url: require("../assets/images/credit-card.png"),
+          subtitle: "Venmo, Google Pay, Credit & Debit cards",
+          screenName: "paymentSettings"
+        },
+        {
+          name: "Notifications",
+          avatar_url: require("../assets/images/alarm.png"),
+          subtitle: "Push & SMS",
+          screenName: "notifSettings"
+        },
+        {
+          name: "Wallet",
+          avatar_url: require("../assets/images/wallet.png"),
+          subtitle: "$6.52",
+          screenName: "walletSettings"
+        },
+        {
+          name: "Support",
+          avatar_url: require("../assets/images/support.png"),
+          screenName: "supportSettings"
+        },
+        {
+          name: "Privacy",
+          avatar_url: require("../assets/images/privacy.png"),
+          subtitle: "Choose what data to share",
+          screenName: "privacySettings"
+        },
+        {
+          name: "Log Out",
+          avatar_url: require("../assets/images/logout.png"),
+          screenName: "main"
+        }
+      ]
+    };
   }
-];
 
-const keyExtractor = (item, index) => index.toString();
+  getScreen() {
+    console.log("hellooooo in getScreen");
+    console.log(this.state.current);
+    switch (this.state.current) {
+      case "Account":
+        return this.getAccountSettingsScreen();
+      case "Profile":
+        return this.getProfileScreen();
+      case "Payment Methods":
+        return this.getPaymentSettingsScreen();
+      case "Notifications":
+        return this.getNotifSettingsScreen();
+      case "Wallet":
+        return this.getWalletSettingsScreen();
+      case "Support":
+        return this.getSupportSettingsScreen();
+      case "Privacy":
+        return this.getPrivacySettingsScreen();
+      case "Log Out":
+        return this.getLogOutSettingsScreen();
+    }
+  }
 
-const renderItem = ({ item }) => (
-  <ListItem
-    title={item.name}
-    subtitle={item.subtitle}
-    leftAvatar={{
-      source: item.avatar_url
-    }}
-    bottomDivider
-    chevron
-  />
-);
+  render() {
+    return (
+      <View>
+        <View>
+          <Header
+            leftComponent={
+              this.state.current != "Account"
+                ? {
+                    icon: "arrow-left",
+                    type: "font-awesome",
+                    color: "black",
+                    onPress: this.handlePress.bind(this)
+                  }
+                : null
+            }
+            centerComponent={{
+              text: "Account",
+              style: { color: "black", fontSize: 24 }
+            }}
+            backgroundColor="white"
+            containerStyle={{
+              borderBottomWidth: 1,
+              borderBottomColor: theme.default.colors.grey5
+            }}
+          />
+        </View>
+        {this.getScreen()}
+      </View>
+    );
+  }
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  return (
-    <FlatList
-      keyExtractor={keyExtractor}
-      data={accountList}
-      renderItem={renderItem}
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({ item }) => (
+    <ListItem
+      title={item.name}
+      subtitle={item.subtitle}
+      leftAvatar={{
+        source: item.avatar_url
+      }}
+      onPress={e => {
+        this.setState({ current: item.name });
+      }}
+      bottomDivider
+      chevron
     />
   );
+
+  getAccountSettingsScreen() {
+    <FlatList
+      keyExtractor={this.keyExtractor}
+      data={this.state.accountList}
+      renderItem={this.renderItem}
+    />;
+  }
+
+  getProfileSettingsScreen() {
+    console.log("in profile settings");
+  }
+
+  getPaymentSettingsScreen() {
+    console.log("in payment settings");
+  }
+
+  getNotifSettingsScreen() {
+    console.log("in notifications settings");
+  }
+
+  getWalletSettingsScreen() {
+    console.log("in wallet settings");
+  }
+
+  getSupportSettingsScreen() {
+    console.log("in support settings");
+  }
+
+  getPrivacySettingsScreen() {
+    console.log("in privacy settings");
+  }
 }
 
 SettingsScreen.navigationOptions = {

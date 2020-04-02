@@ -18,7 +18,7 @@ export default class VerifyAccount extends React.Component {
   }
 
   async verifySignup() {
-    // check if code is valid. If valid, send to main screen
+    // BACKEND: check if code is valid. If valid, send to main screen
     this.props.navigation.navigate("Main");
   }
 

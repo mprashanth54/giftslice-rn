@@ -19,6 +19,9 @@ export default createAppContainer(
       ViewCampaign: MyWishListScreen,
       NewAccount: NewAccount,
       VerifyAccount: VerifyAccount
+
+      // Add individual settings pages here
+      // Profile, Payment, notif, wallet ,privacy, log out
       // New: AddWishListNavigator
     },
     {

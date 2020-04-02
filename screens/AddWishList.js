@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import {
   Button,
   Header,
@@ -20,6 +20,7 @@ import * as theme from "../theme";
 import t from "tcomb-form-native";
 import { Calendar } from "react-native-calendars";
 import moment from "moment";
+import GridList from "react-native-grid-list";
 
 const Form = t.form.Form;
 
@@ -44,6 +45,13 @@ const options = {
   // },
   auto: "placeholders"
 };
+
+const sampleGifts = [
+  { thumbnail: { uri: "https://lorempixel.com/200/200/animals" } },
+  { thumbnail: { uri: "https://lorempixel.com/200/200/city" } },
+  { thumbnail: { uri: "https://lorempixel.com/200/200/nature" } },
+  { thumbnail: { uri: "https://lorempixel.com/200/200/cats" } }
+];
 
 export default class AddWishList extends React.Component {
   constructor(props) {
@@ -113,7 +121,6 @@ export default class AddWishList extends React.Component {
     return (
       <View
         style={{
-          // marginTop: 10,
           height: Dimensions.get("screen").height,
           position: "absolute",
           top: 0,
@@ -155,10 +162,14 @@ export default class AddWishList extends React.Component {
   }
 
   async createGift() {
-    //go to create custom gift screen
+    // go to create custom gift screen
     // this.props.navigation.navigate("createGift");
     console.log("createGift()");
   }
+
+  renderGifts = ({ item, index }) => (
+    <Image style={styles.image} source={item.thumbnail} />
+  );
 
   getGiftScreen() {
     return (
@@ -174,6 +185,14 @@ export default class AddWishList extends React.Component {
         <Text style={styles.fbLoginButton} onPress={() => this.createGift()}>
           Create custom gift instead.
         </Text>
+        <View style={styles.container}>
+          <GridList
+            showSeparator
+            data={sampleGifts}
+            numColumns={2}
+            renderItem={this.renderGifts}
+          />
+        </View>
         <Button
           icon={
             <Icon
@@ -187,8 +206,8 @@ export default class AddWishList extends React.Component {
           buttonStyle={{
             marginTop:
               Platform.os === "android"
-                ? Dimensions.get("screen").height - 360
-                : Dimensions.get("screen").height - 420,
+                ? Dimensions.get("screen").height - 400
+                : Dimensions.get("screen").height - 480,
             borderWidth: 1,
             width: 70,
             height: 70,
@@ -244,7 +263,7 @@ export default class AddWishList extends React.Component {
             <Icon
               name={direction === "right" ? "arrow-right" : "arrow-left"}
               type="font-awesome"
-              size={36}
+              size={28}
               color={theme.default.colors.grey2}
             />
           )}
@@ -661,5 +680,10 @@ const styles = StyleSheet.create({
     color: "#3897f1",
     marginBottom: 10,
     textAlign: "left"
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 10
   }
 });
