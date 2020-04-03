@@ -4,7 +4,8 @@ const { StyleSheet } = React;
 
 export default {
   containerView: {
-    flex: 1
+    flex: 1,
+    marginTop: 10
   },
   header: {
     fontSize: 25,

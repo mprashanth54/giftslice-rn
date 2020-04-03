@@ -612,7 +612,6 @@ export default class AddWishList extends React.Component {
       </View>
     );
   }
-
   render() {
     return (
       <View>

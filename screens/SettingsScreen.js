@@ -13,9 +13,11 @@ import {
   StyleSheet,
   Dimensions,
   Platform,
-  FlatList
+  FlatList,
+  Alert
 } from "react-native";
 import * as theme from "../theme";
+import styles from "./style";
 
 export default class SettingsScreen extends React.Component {
   constructor(props) {
@@ -68,13 +70,13 @@ export default class SettingsScreen extends React.Component {
   }
 
   getScreen() {
-    console.log("hellooooo in getScreen");
+    console.log("in getScreen");
     console.log(this.state.current);
     switch (this.state.current) {
       case "Account":
         return this.getAccountSettingsScreen();
       case "Profile":
-        return this.getProfileScreen();
+        return this.getProfileSettingsScreen();
       case "Payment Methods":
         return this.getPaymentSettingsScreen();
       case "Notifications":
@@ -91,34 +93,7 @@ export default class SettingsScreen extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <View>
-          <Header
-            leftComponent={
-              this.state.current != "Account"
-                ? {
-                    icon: "arrow-left",
-                    type: "font-awesome",
-                    color: "black",
-                    onPress: this.handlePress.bind(this)
-                  }
-                : null
-            }
-            centerComponent={{
-              text: "Account",
-              style: { color: "black", fontSize: 24 }
-            }}
-            backgroundColor="white"
-            containerStyle={{
-              borderBottomWidth: 1,
-              borderBottomColor: theme.default.colors.grey5
-            }}
-          />
-        </View>
-        {this.getScreen()}
-      </View>
-    );
+    return <View>{this.getScreen()}</View>;
   }
 
   keyExtractor = (item, index) => index.toString();
@@ -138,20 +113,80 @@ export default class SettingsScreen extends React.Component {
     />
   );
 
+  handlePress() {
+    console.log("handlePress");
+    const screens = [
+      "Account",
+      "Profile",
+      "Payment Methods",
+      "Notifications",
+      "Wallet",
+      "Support",
+      "Privacy",
+      "Log Out"
+    ];
+    const { current } = this.state;
+    let i = screens.indexOf(current);
+    i = i > 0 ? i - 1 : i;
+    this.setState({ current: screens[i] });
+  }
+
   getAccountSettingsScreen() {
-    <FlatList
-      keyExtractor={this.keyExtractor}
-      data={this.state.accountList}
-      renderItem={this.renderItem}
-    />;
+    return (
+      <FlatList
+        keyExtractor={this.keyExtractor}
+        data={this.state.accountList}
+        renderItem={this.renderItem}
+      />
+    );
   }
 
   getProfileSettingsScreen() {
     console.log("in profile settings");
+    return (
+      <View style={styles.container}>
+        <Header
+          leftComponent={
+            this.state.current != "Account"
+              ? {
+                  icon: "arrow-left",
+                  type: "font-awesome",
+                  color: "black",
+                  onPress: this.handlePress.bind(this)
+                }
+              : null
+          }
+          centerComponent={{
+            style: { color: "black", fontSize: 24 }
+          }}
+          backgroundColor="white"
+        />
+      </View>
+    );
   }
 
   getPaymentSettingsScreen() {
     console.log("in payment settings");
+    return (
+      <View>
+        <Header
+          leftComponent={
+            this.state.current != "Account"
+              ? {
+                  icon: "arrow-left",
+                  type: "font-awesome",
+                  color: "black",
+                  onPress: this.handlePress.bind(this)
+                }
+              : null
+          }
+          centerComponent={{
+            style: { color: "black", fontSize: 24 }
+          }}
+          backgroundColor="white"
+        />
+      </View>
+    );
   }
 
   getNotifSettingsScreen() {
@@ -164,10 +199,47 @@ export default class SettingsScreen extends React.Component {
 
   getSupportSettingsScreen() {
     console.log("in support settings");
+    return (
+      <View style={styles.container}>
+        <Header
+          leftComponent={
+            this.state.current != "Account"
+              ? {
+                  icon: "arrow-left",
+                  type: "font-awesome",
+                  color: "black",
+                  onPress: this.handlePress.bind(this)
+                }
+              : null
+          }
+          centerComponent={{
+            style: { color: "black", fontSize: 24 }
+          }}
+          backgroundColor="white"
+        />
+      </View>
+    );
   }
 
   getPrivacySettingsScreen() {
     console.log("in privacy settings");
+  }
+
+  getLogOutSettingsScreen() {
+    console.log("in logout settings");
+    Alert.alert(
+      "Log Out?",
+      "This will log you out on all devices",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
+      ],
+      { cancelable: false }
+    );
   }
 }
 
