@@ -143,6 +143,7 @@ export default class LoginScreen extends React.Component {
                                     type="clear"
                                     titleStyle={{ color: theme.colors.grey1 }}
                                     buttonStyle={{ borderBottomColor: theme.colors.greyOutline, borderBottomWidth: 1 }}
+                                    onPress={() => { this.props.navigation.navigate("NewAccount") }}
                                 />
                             </View>
                         </View>
