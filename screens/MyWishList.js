@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { Text, Tile, Avatar, Slider, Button, Input, CheckBox } from 'react-native-elements'
+import { Text, Tile, Avatar, Slider, Button, Input, CheckBox, Header } from 'react-native-elements'
 import * as theme from '../theme'
 import AnimatedProgressWheel from 'react-native-progress-wheel'
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -249,12 +249,19 @@ export default class MyWishListScreen extends React.Component {
         )
     }
 
+
     render() {
         const [needed, total] = getAmount()
 
         return (
             <View>
                 <ScrollView>
+                    <Header
+                        placement="left"
+                        leftComponent={{ icon: 'chevron-left', size: 36, onPress: () => this.props.navigation.navigate('Main') }}
+                        leftContainerStyle={{ borderBottomWidth: 0, borderBottomColor: 'transparent' }}
+                        containerStyle={{ backgroundColor: 'transparent', position: 'absolute', zIndex: 10 }}
+                    />
                     <Tile
                         // containerStyle={{ margin: 0, padding: 0 }}
                         imageSrc={require('../assets/images/babyshower1.jpg')}

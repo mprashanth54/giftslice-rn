@@ -11,6 +11,7 @@ import {
     FlatList
 } from 'react-native';
 import { Text, Tile, Avatar, Slider, Button, Input, CheckBox, colors, Header, ListItem } from 'react-native-elements'
+import * as ImagePicker from 'expo-image-picker'
 import * as theme from '../theme'
 import AnimatedProgressWheel from 'react-native-progress-wheel'
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -78,6 +79,7 @@ export default class NewWishListScreen extends React.Component {
             header: '',
             eventTitle: '',
             description: '',
+            image: null,
             organizers: [
                 {
                     index: 0,
@@ -509,19 +511,39 @@ export default class NewWishListScreen extends React.Component {
         return type === 'Organizer' ? this.getAddOrganizer() : this.getAddContributor()
     }
 
+    async launchPicker() {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
+
     getHomeScreem() {
         const [needed, total] = getAmount()
-        console.log(this.state)
+        console.log(this.state.image)
         return (
             <View>
                 <ScrollView>
-                    <Tile
+                    {this.state.image ? <Tile
                         // containerStyle={{ margin: 0, padding: 0 }}
                         icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
-
-                        // imageSrc={require('../assets/images/babyshower1.jpg')}
+                        onPress={this.launchPicker.bind(this)}
+                        imageSrc={{ uri: this.state.image }}
                         feature
-                    />
+                    /> : <Tile
+                            // containerStyle={{ margin: 0, padding: 0 }}
+                            icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
+                            onPress={this.launchPicker.bind(this)}
+                            feature
+                        />}
                     <View style={{ marginLeft: 20, marginRight: 20 }}>
                         <View style={{ flexDirection: 'row', marginTop: -20, }}>
                             <View style={{ alignSelf: 'baseline' }}>
