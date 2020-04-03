@@ -12,7 +12,8 @@ import MyWishListScreen from '../screens/MyWishList'
 import EditWishListScreen from '../screens/EditWishList'
 import * as theme from '../theme'
 import { Text } from 'react-native-elements'
-import AddWishList from '../screens/AddWishList';
+// import AddWishList from '../screens/AddWishList';
+import NewWishList from '../screens/AddWishList-new'
 // import AddWishList from '../screens/AddWishList'
 
 
@@ -84,7 +85,7 @@ NotificationStack.path = 'Notification';
 
 const AddStack = createStackNavigator(
   {
-    Add: AddWishList,
+    Add: NewWishList,
   },
   config
 );

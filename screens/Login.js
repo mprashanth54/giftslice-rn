@@ -14,9 +14,9 @@ export default class LoginScreen extends React.Component {
 
     async login() {
         //Write the implementation to verify and check here. If all is successful call this method below
-        // this.props.navigation.navigate('Main')
-        const isValid = await Auth.login('m.prashanth54@gmail.com', 'Test@123')
-        if (isValid) this.props.navigation.navigate('Main')
+        this.props.navigation.navigate('Main')
+        // const isValid = await Auth.login('m.prashanth54@gmail.com', 'Test@123')
+        // if (isValid) this.props.navigation.navigate('Main')
     }
 
     render() {
