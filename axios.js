@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import Auth from './stores/auth'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://giftslice.herokuapp.com',
     timeout: 1000,
     headers: { 'Authorization': '' }
 });
