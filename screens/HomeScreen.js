@@ -140,7 +140,7 @@ export default class HomeScreen extends React.Component {
                 }}
                 color={theme.default.Button.primaryColor}
                 buttonStyle={theme.default.Button.primary}
-                onPress={() => { this.updateView() }}
+                onPress={() => { this.props.navigation.navigate('ViewCampaign') }}
                 title='$ Contribute' />
             </View>
           </View>
@@ -183,22 +183,22 @@ export default class HomeScreen extends React.Component {
     )
   }
 
-  handleBackPress() {
-    if (this.state.view) {
-      this.updateView()
-      return true
-    }
-    return false
-  }
+  // handleBackPress() {
+  //   if (this.state.view) {
+  //     this.updateView()
+  //     return true
+  //   }
+  //   return false
+  // }
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress.bind(this));
-  }
+  // componentDidMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.handleBackPress.bind(this));
+  // }
 
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress')
-  }
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress')
+  // }
 
   render() {
     return (
