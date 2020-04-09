@@ -112,8 +112,10 @@ export default class NewAccount extends React.Component {
                 onChangeText={t => this.setState({ name: t })} />
               <Input
                 value={this.state.mobile}
+                keyboardType='phone-pad'
                 inputContainerStyle={{ marginBottom: 10, marginTop: 15, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
                 placeholder='Mobile'
+                maxLength={10}
                 leftIcon={{ type: 'antdesign', name: 'mobile1', color: theme.colors.greyOutline }}
                 leftIconContainerStyle={{ marginRight: 20 }}
                 onChangeText={t => this.setState({ mobile: t })} />
@@ -121,9 +123,10 @@ export default class NewAccount extends React.Component {
                 value={this.state.email}
                 inputContainerStyle={{ marginBottom: 10, marginTop: 15, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
                 placeholder='Email'
+                keyboardType='email-address'
                 leftIcon={{ type: 'font-awesome', name: 'envelope-o', color: theme.colors.greyOutline }}
                 leftIconContainerStyle={{ marginRight: 20 }}
-                onChangeText={t => this.setState({ email: t })} />
+                onChangeText={t => this.setState({ email: t.toLowerCase() })} />
               <Input
                 value={this.state.password}
                 inputContainerStyle={{ marginBottom: 30, marginTop: 10, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}

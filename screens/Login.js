@@ -17,6 +17,7 @@ export default class LoginScreen extends React.Component {
         super(props);
         console.log("I'm in Login");
         this.state = {
+            loading: false,
             email: '',
             password: '',
             error: ''
@@ -26,8 +27,10 @@ export default class LoginScreen extends React.Component {
     async login() {
         //Write the implementation to verify and check here. If all is successful call this method below
         // this.props.navigation.navigate('Main')
+        this.setState({ loading: true })
         const { email, password } = this.state
         const isValid = await Auth.login(email, password);
+        this.setState({ loading: false })
         if (isValid) this.props.navigation.navigate("Main");
         else this.setState({ error: "Invalid Credentials" })
     }
@@ -118,11 +121,12 @@ export default class LoginScreen extends React.Component {
                             </View>
                             <Input
                                 value={this.state.email}
+                                keyboardType='email-address'
                                 inputContainerStyle={{ marginBottom: 10, marginTop: 15, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
                                 placeholder='Email'
                                 leftIcon={{ type: 'font-awesome', name: 'envelope-o', color: theme.colors.greyOutline }}
                                 leftIconContainerStyle={{ marginRight: 20 }}
-                                onChangeText={t => this.setState({ email: t })} />
+                                onChangeText={t => this.setState({ email: t.toLowerCase() })} />
                             <Input
                                 value={this.state.password}
                                 inputContainerStyle={{ marginBottom: 30, marginTop: 10, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
@@ -131,13 +135,17 @@ export default class LoginScreen extends React.Component {
                                 leftIcon={{ type: 'ant-design', name: 'lock', color: theme.colors.greyOutline }}
                                 leftIconContainerStyle={{ marginRight: 15 }}
                                 onChangeText={t => this.setState({ password: t })} />
-
-                            <Button buttonStyle={theme.Button.primary} title='Login' onPress={this.login.bind(this)}></Button>
+                            {this.state.loading ?
+                                <Button buttonStyle={theme.Button.primary} loading></Button> :
+                                <Button buttonStyle={theme.Button.primary} title='Login' onPress={this.login.bind(this)}></Button>
+                            }
+                            {/* <Button buttonStyle={theme.Button.primary} title='Login' onPress={this.login.bind(this)}></Button> */}
 
 
                             <View style={{ width: 300, alignItems: 'center', justifyContent: 'center' }}>
                                 {this.state.error.length ? <Text style={{ fontSize: 18, color: 'red', marginBottom: 10, marginTop: 10 }}>{this.state.error}</Text> : null}
                                 <Text style={{ fontSize: 18, color: theme.colors.grey1, marginBottom: 10, marginTop: 10 }}>(or)</Text>
+
                                 <Button
                                     title="Sign Up"
                                     type="clear"
