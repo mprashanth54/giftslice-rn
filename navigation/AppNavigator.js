@@ -7,6 +7,7 @@ import VerifyAccount from "../screens/VerifyAccount";
 import MyWishListScreen from "../screens/MyWishList"
 import MainTabNavigator from "./MainTabNavigator";
 import AddGifts from "../screens/AddGifts";
+import Profile from "../screens/Profile"
 
 // import AddWishListNavigator from './AddWishListNavigator'
 // import AddWishList from '.'
@@ -21,7 +22,8 @@ export default createAppContainer(
       ViewCampaign: MyWishListScreen,
       NewAccount: NewAccount,
       VerifyAccount: VerifyAccount,
-      AddGifts: AddGifts
+      AddGifts: AddGifts,
+      Profile: Profile
       // New: AddWishListNavigator
     },
     {
