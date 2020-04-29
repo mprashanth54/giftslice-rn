@@ -1,12 +1,15 @@
 import React from "react";
 import { ListItem } from "react-native-elements";
 import { FlatList } from "react-native";
+import User from '../stores/user'
+import Auth from '../stores/auth'
+import { observer } from "mobx-react";
 
 const accountList = [
   {
     name: "Profile",
     avatar_url: require("../assets/images/account.png"),
-    subtitle: "John Doe",
+    subtitle: User.info.name,
     link: 'Profile'
   },
   {
@@ -51,7 +54,7 @@ const accountList = [
 ];
 
 
-
+@observer
 export default class SettingsScreen extends React.Component {
 
   constructor(props) {
@@ -62,9 +65,12 @@ export default class SettingsScreen extends React.Component {
   keyExtractor = (item, index) => index.toString();
 
   handleClick = (link) => {
-    console.log(link)
     switch (link) {
       case 'Profile': this.props.navigation.navigate('Profile')
+      case 'LogOut': {
+        Auth.authToken = ''
+        this.props.navigation.navigate('Login')
+      }
     }
   }
 
