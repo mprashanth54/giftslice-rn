@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from 'react-native'
-import { NavigationActions } from 'react-navigation'
-import { Avatar, Header, Icon } from 'react-native-elements'
+import { Avatar, Header, Input } from 'react-native-elements'
 import * as theme from '../theme'
 import * as ImagePicker from 'expo-image-picker'
 import { observer } from 'mobx-react';
@@ -35,21 +34,13 @@ export default class Profile extends React.Component {
         });
 
         if (!result.cancelled) {
-            console.log('After Picker')
-            const formData = new FormData()
-            let uriParts = result.uri.split('.');
-            let fileName = uriParts[uriParts.length - 1];
-            result.name = `Profile.${fileName}`
-            formData.append('file', result)
-            console.log(formData)
-            const name = await ImageService.uploadFile(formData)
-            console.log(name)
+
+            const name = await ImageService.uploadFile(result)
             await User.updateImage(name)
         }
     };
 
     render() {
-        console.log(User.info)
         return (
             <View>
                 <Header
@@ -83,6 +74,32 @@ export default class Profile extends React.Component {
                             />
 
                     }
+                    <Input
+                        editable={false}
+                        inputContainerStyle={{ marginBottom: 10, marginTop: 40 }}
+                        inputStyle={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 18 }}
+                        placeholder='email'
+                        leftIcon={{
+                            type: "font-awesome",
+                            name: "envelope-o",
+                            color: theme.default.colors.greyOutline,
+                        }}
+                        leftIconContainerStyle={{ marginRight: 20 }}
+                        value={User.info.email}
+                    />
+                    {/* <Input
+                        secureTextEntry={true}
+                        inputContainerStyle={{ marginBottom: 10, marginTop: 40 }}
+                        inputStyle={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 18 }}
+                        placeholder='Old Password'
+                        leftIcon={{
+                            type: "font-awesome",
+                            name: "envelope-o",
+                            color: theme.default.colors.greyOutline,
+                        }}
+                        leftIconContainerStyle={{ marginRight: 20 }}
+                        value={User.info.email}
+                    /> */}
                 </View>
             </View>
         )
