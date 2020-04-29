@@ -5,30 +5,30 @@ const { StyleSheet } = React;
 export default {
   containerView: {
     flex: 1,
-    marginTop: 10
+    marginTop: 10,
   },
   header: {
     fontSize: 25,
     textAlign: "center",
     marginTop: 50,
     marginBottom: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   loginScreenContainer: {
     backgroundColor: "#e1e8ee",
-    flex: 1
+    flex: 1,
   },
   logo: {
     fontSize: 20,
     marginBottom: 30,
-    textAlign: "center"
+    textAlign: "center",
   },
   logoText: {
     fontSize: 50,
     fontWeight: "500",
     marginTop: 150,
     marginBottom: 30,
-    textAlign: "center"
+    textAlign: "center",
   },
   loginFormTextInput: {
     height: 45,
@@ -41,14 +41,14 @@ export default {
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
-    marginBottom: 1
+    marginBottom: 1,
   },
   loginButton: {
     backgroundColor: "#3897f1",
     borderRadius: 5,
     height: 45,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   fbLoginButton: {
     fontSize: 20,
@@ -56,16 +56,16 @@ export default {
     marginTop: 10,
     backgroundColor: "transparent",
     color: "#3897f1",
-    marginBottom: 10
+    marginBottom: 10,
   },
   footer: {
     position: "absolute",
     height: 70,
     left: 0,
-    bottom: 20
+    bottom: 0,
   },
   tinyLogoImage: {
     width: 70,
-    height: 70
-  }
+    height: 70,
+  },
 };

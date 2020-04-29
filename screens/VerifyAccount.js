@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Linking,
 } from "react-native";
 import { Button } from "react-native-elements";
 import styles from "./style";
@@ -18,7 +19,7 @@ export default class VerifyAccount extends React.Component {
   }
 
   async verifySignup() {
-    // BACKEND: check if code is valid. If valid, send to main screen
+    // check if code is valid. If valid, send to main screen
     this.props.navigation.navigate("Main");
   }
 
@@ -47,14 +48,23 @@ export default class VerifyAccount extends React.Component {
                 onPress={() => this.verifySignup()}
                 title="Verify"
               />
-              <Text onPress={() => this.sendAgain()}>
+              <Text onPress={() => this.sendEmail()}>
                 Didn't get an email? Send again.
               </Text>
             </View>
             <Text style={styles.footer}>
               {" "}
-              By continuing to use GiftSlice, you agree to the Giftslice terms
-              and privacy policy.
+              By continuing to use GiftSlice, you agree to the Giftslice{" "}
+              <Text
+                style={{ color: "blue" }}
+                onPress={() =>
+                  Linking.openURL(
+                    "https://docs.google.com/document/d/19RUsMikhBJX5Va6BCBWvherc3SROokjc0Ay9NgWTda4/edit?usp=sharing://google.com"
+                  )
+                }
+              >
+                terms and privacy policy
+              </Text>
             </Text>
           </View>
         </TouchableWithoutFeedback>
@@ -65,5 +75,5 @@ export default class VerifyAccount extends React.Component {
 
 VerifyAccount.navigationOptions = {
   title: "VerifyAccount",
-  header: null
+  header: null,
 };
