@@ -29,56 +29,6 @@ export default class NewAccount extends React.Component {
     this.props.navigation.navigate("Login");
   }
 
-  // render() {
-  //   return (
-  //     <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-  //       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-  //         <View style={styles.loginScreenContainer}>
-  //           <View style={styles.loginFormView}>
-  //             <Text style={styles.logoText}>GiftSlice</Text>
-  //             <TextInput
-  //               placeholder="First Name"
-  //               placeholderColor="#c4c3cb"
-  //               style={styles.loginFormTextInput}
-  //             />
-  //             <TextInput
-  //               placeholder="Last Name"
-  //               placeholderColor="#c4c3cb"
-  //               style={styles.loginFormTextInput}
-  //               secureTextEntry={true}
-  //             />
-  //             <TextInput
-  //               placeholder="Email"
-  //               placeholderColor="#c4c3cb"
-  //               style={styles.loginFormTextInput}
-  //             />
-  //             <TextInput
-  //               placeholder="Password"
-  //               placeholderColor="#c4c3cb"
-  //               style={styles.loginFormTextInput}
-  //               secureTextEntry={true}
-  //             />
-  //             <TextInput
-  //               placeholder="Phone Number"
-  //               placeholderColor="#c4c3cb"
-  //               style={styles.loginFormTextInput}
-  //               secureTextEntry={true}
-  //             />
-  //             <Button
-  //               buttonStyle={styles.loginButton}
-  //               onPress={() => this.signup()}
-  //               title="Sign Up"
-  //             />
-  //             <Text style={{ fontSize: 16 }} onPress={() => this.goToLogin()}>
-  //               Already have an account? Sign in here.
-  //             </Text>
-  //           </View>
-  //         </View>
-  //       </TouchableWithoutFeedback>
-  //     </KeyboardAvoidingView>
-  // );
-  // }
-
   render() {
     return (
       <View style={styles.container}>
