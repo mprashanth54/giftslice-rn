@@ -4,8 +4,10 @@ import { createStackNavigator } from "react-navigation-stack";
 import LoginScreen from "../screens/Login";
 import NewAccount from "../screens/NewAccount";
 import VerifyAccount from "../screens/VerifyAccount";
-import MyWishListScreen from "../screens/MyWishList"
+import MyWishListScreen from "../screens/MyWishList";
 import MainTabNavigator from "./MainTabNavigator";
+import AddGifts from "../screens/AddGifts";
+
 // import AddWishListNavigator from './AddWishListNavigator'
 // import AddWishList from '.'
 
@@ -18,14 +20,12 @@ export default createAppContainer(
       Login: LoginScreen,
       ViewCampaign: MyWishListScreen,
       NewAccount: NewAccount,
-      VerifyAccount: VerifyAccount
-
-      // Add individual settings pages here
-      // Profile, Payment, notif, wallet ,privacy, log out
+      VerifyAccount: VerifyAccount,
+      AddGifts: AddGifts,
       // New: AddWishListNavigator
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Login",
     }
   )
 );

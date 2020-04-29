@@ -1199,6 +1199,13 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
+"@react-native-community/datetimepicker@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-2.1.0.tgz#4e3413462cbbe5c48fab6cebd422835031cdf7b9"
+  integrity sha512-InktUrx0/4JTy1YsgswljgID7oB3L8wkFobRhnLGWPExSsNHeecGW2/nBP31ZaOPHcjVWhpOQMZt0zDpKfGE/Q==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-navigation/core@^3.5.1":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.5.2.tgz#3a3d147b8419e5839e0f2ad4dea086bd2d307fe3"
@@ -5750,12 +5757,21 @@ react-native-gesture-handler@~1.5.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+<<<<<<< HEAD
 react-native-grid-list@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-grid-list/-/react-native-grid-list-1.1.0.tgz#accacca7b6c387704ab4f7edc735a484547dd3c2"
   integrity sha512-sMyYIcKyEb4zyXpaisEIB3OWvgC9xXkw4XQGKEsFKMsPUQMD5IEG0qvnyy9NxJk/zaEy0aSV4u9x03iwtvM+jg==
   dependencies:
     prop-types "^15.6.0"
+=======
+react-native-modal-datetime-picker@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-8.6.0.tgz#d3ce022b44926c5f08fc4fc29718ec8ef0111592"
+  integrity sha512-eotQuosAy/eKtmAr/XbsBwMJ9uvkrus8m9FGMvvlY1ExOEH+69fFAgHbXwu/42FQ78J0qA23nuGenWvPEf4XIQ==
+  dependencies:
+    prop-types "^15.7.2"
+>>>>>>> origin/master
 
 react-native-modal@^11.5.4:
   version "11.5.4"

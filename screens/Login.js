@@ -6,6 +6,8 @@ import Auth from "../stores/auth";
 // import styles from "./style";
 import theme from "../theme";
 const appID = "624136824831258"; // TODO: need to get for Facebook login
+const logo = require('../assets/images/App-Logo.png')
+
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -46,50 +48,47 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  async signup() {
-    this.props.navigation.navigate("NewAccount");
-  }
-
-  // render() {
-  //     return (
-  //         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-  //             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-  //                 <View style={styles.loginScreenContainer}>
-  //                     <View>
-  //                         <Text style={styles.logoText}>GiftSlice</Text>
-  //                         <Text style={styles.logo}>
-  //                             The #1 most trusted gift pooling platform.
-  //           </Text>
-  //                         <TextInput
-  //                             placeholder="Username"
-  //                             placeholderColor="#c4c3cb"
-  //                             style={styles.loginFormTextInput}
-  //                         />
-  //                         <TextInput
-  //                             placeholder="Password"
-  //                             placeholderColor="#c4c3cb"
-  //                             style={styles.loginFormTextInput}
-  //                             secureTextEntry={true}
-  //                         />
-  //                         <Button
-  //                             buttonStyle={styles.loginButton}
-  //                             onPress={() => this.login()}
-  //                             title="Log In"
-  //                         />
-  //                         <Button
-  //                             buttonStyle={styles.loginButton}
-  //                             onPress={() => this.signup()}
-  //                             title="Create a New Account"
-  //                         />
-  //                         <Text style={styles.fbLoginButton} onPress={() => this.fblogin()}>
-  //                             Continue with Facebook
-  //           </Text>
-  //                     </View>
-  //                 </View>
-  //             </TouchableWithoutFeedback>
-  //         </KeyboardAvoidingView>
-  //     );
-  // }
+    render() {
+        return (
+            <View style={styles.container}>
+                <ImageBackground source={require('../assets/images/Bg.jpg')} style={styles.image}>
+                    <View style={{
+                        alignItems: 'center',
+                        flex: 1,
+                        justifyContent: 'center'
+                    }}>
+                        <View style={{
+                            backgroundColor: 'white', width: 350, borderRadius: 10, shadowColor: "#000",
+                            padding: 20,
+                            shadowOffset: {
+                                width: 0,
+                                height: 2,
+                            },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 3.84,
+                            elevation: 10,
+                        }}>
+                            <View style={{ width: 300, alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                                <Image source={logo}
+                                    style={{ width: 200, height: 40 }} />
+                            </View>
+                            <Input
+                                value={this.state.email}
+                                keyboardType='email-address'
+                                inputContainerStyle={{ marginBottom: 10, marginTop: 15, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
+                                placeholder='Email'
+                                leftIcon={{ type: 'font-awesome', name: 'envelope-o', color: theme.colors.greyOutline }}
+                                leftIconContainerStyle={{ marginRight: 20 }}
+                                onChangeText={t => this.setState({ email: t.toLowerCase() })} />
+                            <Input
+                                value={this.state.password}
+                                inputContainerStyle={{ marginBottom: 30, marginTop: 10, borderRadius: 50, borderBottomColor: 'transparent', backgroundColor: 'rgba(211,211,211, 0.3)' }}
+                                placeholder='Password'
+                                secureTextEntry={true}
+                                leftIcon={{ type: 'ant-design', name: 'lock', color: theme.colors.greyOutline }}
+                                leftIconContainerStyle={{ marginRight: 15 }}
+                                onChangeText={t => this.setState({ password: t })} />
+                            <Button buttonStyle={theme.Button.primary} loading={this.state.loading} title='Login' onPress={this.login.bind(this)}></Button>
 
   render() {
     return (
