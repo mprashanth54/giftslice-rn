@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
     Image,
@@ -10,11 +9,16 @@ import {
     View,
     FlatList
 } from 'react-native';
-import { Text, Tile, Avatar, Slider, Button, Input, CheckBox, colors, Header, ListItem } from 'react-native-elements'
+import { Text, Tile, Avatar, Slider, Button, Input, CheckBox, colors, Header, ListItem, Icon } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
 import * as theme from '../theme'
 import AnimatedProgressWheel from 'react-native-progress-wheel'
 import RBSheet from "react-native-raw-bottom-sheet";
+import Gift from '../stores/gifts';
+import NewEvent from '../stores/NewEvent'
+import { observer } from 'mobx-react';
+// import DateTimePickerModal from "react-native-modal-datetime-picker"
+
 
 const products = [
     {
@@ -67,7 +71,7 @@ const getAmount = () => {
 
 
 
-
+@observer
 export default class NewWishListScreen extends React.Component {
 
     constructor(props) {
@@ -80,118 +84,8 @@ export default class NewWishListScreen extends React.Component {
             eventTitle: '',
             description: '',
             image: null,
-            organizers: [
-                {
-                    index: 0,
-                    name: 'Shanel',
-                    avatar_url: require('../assets/images/user2.jpg'),
-                    checked: false
-                },
-                {
-                    index: 1,
-                    name: 'Prashanth',
-                    avatar_url: require('../assets/images/user3.jpg'),
-                    checked: false
-                },
-                {
-                    index: 2,
-                    name: 'Griffin',
-                    avatar_url: require('../assets/images/user4.jpg'),
-                    checked: false
-                },
-                {
-                    index: 3,
-                    name: 'Iryna',
-                    avatar_url: require('../assets/images/user5.jpg'),
-                    checked: false
-                },
-                {
-                    index: 4,
-                    name: 'Daniel',
-                    avatar_url: require('../assets/images/user6.jpg'),
-                    checked: false
-                },
-                {
-                    index: 5,
-                    name: 'Salil',
-                    avatar_url: require('../assets/images/user7.jpg'),
-                    checked: false
-                },
-                {
-                    index: 6,
-                    name: 'John',
-                    avatar_url: require('../assets/images/user8.jpg'),
-                    checked: false
-                },
-                {
-                    index: 7,
-                    name: 'Jane',
-                    avatar_url: require('../assets/images/user3.jpg'),
-                    checked: false
-                },
-                {
-                    index: 8,
-                    name: 'Roxen',
-                    avatar_url: require('../assets/images/user5.jpg'),
-                    checked: false
-                }
-            ],
-            contributors: [
-                {
-                    index: 0,
-                    name: 'Shanel',
-                    avatar_url: require('../assets/images/user2.jpg'),
-                    checked: false
-                },
-                {
-                    index: 1,
-                    name: 'Prashanth',
-                    avatar_url: require('../assets/images/user3.jpg'),
-                    checked: false
-                },
-                {
-                    index: 2,
-                    name: 'Griffin',
-                    avatar_url: require('../assets/images/user4.jpg'),
-                    checked: false
-                },
-                {
-                    index: 3,
-                    name: 'Iryna',
-                    avatar_url: require('../assets/images/user5.jpg'),
-                    checked: false
-                },
-                {
-                    index: 4,
-                    name: 'Daniel',
-                    avatar_url: require('../assets/images/user6.jpg'),
-                    checked: false
-                },
-                {
-                    index: 5,
-                    name: 'Salil',
-                    avatar_url: require('../assets/images/user7.jpg'),
-                    checked: false
-                },
-                {
-                    index: 6,
-                    name: 'John',
-                    avatar_url: require('../assets/images/user8.jpg'),
-                    checked: false
-                },
-                {
-                    index: 7,
-                    name: 'Jane',
-                    avatar_url: require('../assets/images/user3.jpg'),
-                    checked: false
-                },
-                {
-                    index: 8,
-                    name: 'Roxen',
-                    avatar_url: require('../assets/images/user5.jpg'),
-                    checked: false
-                }
-            ]
+            // organizers: ,
+            // contributors: 
         }
     }
 
@@ -201,20 +95,25 @@ export default class NewWishListScreen extends React.Component {
     }
 
 
+    deleteItem(id) {
+        Gift.newGifts = Gift.newGifts.filter(gift => gift._id !== id)
+    }
+
     productList = () => {
-        const { isModalVisible, checked1, checked2 } = this.state
-        const pay = React.createRef()
+        // const { isModalVisible, checked1, checked2 } = this.state
+        // const pay = React.createRef()
         // pay.current.setNativeProps({ value: 40 })
         // console.log(isModalVisible)
         return (
-            products.map((product, index) => {
-                let productTitle = `0${index + 1}  ${product.name}`
+            Gift.newGifts.map((gift) => {
+                // let productTitle = `0${index + 1}  ${product.name}`
+                console.log(gift)
                 return (
-                    <View key={index} style={{ borderBottomWidth: 1, borderBottomColor: theme.default.colors.grey5, marginBottom: 5, marginTop: 5 }}>
+                    <View key={gift._id} style={{ borderBottomWidth: 1, borderBottomColor: theme.default.colors.grey5, marginBottom: 5, marginTop: 5 }}>
                         <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                             <View style={{ alignSelf: 'baseline', width: '90%' }}>
                                 <Text style={{ fontFamily: 'roboto-light', fontSize: 24, marginTop: 10 }}>
-                                    {productTitle}
+                                    {gift.name}
                                 </Text>
                             </View>
                             <View style={{ alignSelf: 'baseline', width: '10%' }}>
@@ -222,23 +121,23 @@ export default class NewWishListScreen extends React.Component {
                                     size={40}
                                     width={20}
                                     color={theme.default.colors.secondary}
-                                    progress={product.collected / product.cost * 100}
+                                    progress={gift.collected ? gift.collected / gift.price * 100 : 0}
                                     backgroundColor={theme.default.colors.grey5}
                                 />
                             </View>
                         </View>
                         <Image
-                            source={product.photo}
+                            source={{ uri: gift.images[0] }}
                             style={{ width: '100%', height: 200, marginTop: 10, marginBottom: 10, borderRadius: 10 }}
                         />
                         <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                             <View style={{ alignSelf: 'baseline', width: '60%' }}>
                                 <Text style={{ fontFamily: 'roboto-light', fontSize: 20, marginTop: 10, marginLeft: 10 }}>
-                                    ${product.cost} (${Math.round(product.collected / product.cost * 100)}% raised)
+                                    ${gift.price} (${gift.collected ? Math.round(gift.collected / gift.price * 100) : 0}% raised)
                                 </Text>
                             </View>
                             <View style={{ alignSelf: 'baseline', width: '40%' }}>
-                                <View style={{ opacity: (product.collected === product.cost) ? 0 : 1 }}>
+                                <View style={{ opacity: (gift.collected === gift.price) ? 0 : 1 }}>
                                     <Button
                                         linearGradientProps={{
                                             colors: ['#d83f91', '#d0409b', '#c743a5', '#bb47af', '#ae4bb8'],
@@ -247,120 +146,12 @@ export default class NewWishListScreen extends React.Component {
                                         }}
                                         color={theme.default.Button.primaryColor}
                                         buttonStyle={theme.default.Button.primary}
-                                        onPress={(e) => { this.RBSheet.open() }}
-                                        title='$Pay Partial' />
+                                        onPress={(e) => { this.deleteItem(gift._id) }}
+                                        title='Delete' />
 
                                 </View>
                             </View>
                         </View>
-
-                        <View>
-                            <RBSheet
-                                ref={ref => {
-                                    this.RBSheet = ref;
-                                }}
-                                height={350}
-                                // duration={250}
-                                closeOnDragDown
-                                customStyles={{
-                                    container: {
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        borderTopLeftRadius: 10,
-                                        borderTopRightRadius: 10,
-                                    }
-                                }}
-                            >
-                                <ScrollView>
-                                    <View>
-                                        <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                            <Text style={{ fontFamily: 'roboto-light', width: '100%', textAlign: 'center', fontSize: 36, borderBottomWidth: 1, borderBottomColor: theme.default.colors.grey5, paddingBottom: 10 }}> Quick Pay</Text>
-                                        </View>
-                                        <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                            <Input
-                                                ref={pay}
-                                                keyboardType='numeric'
-                                                containerStyle={{ marginTop: 20, marginBottom: 10, }}
-                                                inputContainerStyle={{ paddingBottom: 10, borderBottomColor: 'transparent' }}
-                                                inputStyle={{ marginLeft: 10 }}
-                                                placeholder='Amount to contribute'
-                                                leftIcon={{ type: 'font-awesome', name: 'dollar', color: theme.default.colors.primary }}
-                                            />
-                                        </View>
-                                        <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                            <View style={{ alignSelf: 'baseline' }}>
-                                                <CheckBox
-                                                    center
-                                                    containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
-                                                    checkedColor={theme.default.colors.primary}
-                                                    // title='ggh'
-                                                    checkedIcon='dot-circle-o'
-                                                    uncheckedIcon='circle-o'
-                                                    checked={checked1}
-                                                />
-                                            </View>
-                                            <View style={{ alignSelf: 'baseline' }}>
-                                                <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                                    <View style={{ alignSelf: 'baseline' }}>
-                                                        <Avatar
-                                                            source={require('../assets/images/credit-card.png')}
-                                                            size='small'
-                                                            overlayContainerStyle={{ backgroundColor: 'transparent' }}
-                                                        />
-                                                    </View>
-                                                    <View style={{ alignSelf: 'baseline' }}>
-                                                        <Text style={{ fontFamily: 'roboto-light', fontSize: 20, paddingLeft: 10 }}>Credit card</Text>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                        </View>
-                                        <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                            <View style={{ alignSelf: 'baseline' }}>
-                                                <CheckBox
-                                                    center
-                                                    containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
-                                                    checkedColor={theme.default.colors.primary}
-                                                    checkedIcon='dot-circle-o'
-                                                    uncheckedIcon='circle-o'
-                                                    checked={checked2}
-                                                />
-                                            </View>
-                                            <View style={{ alignSelf: 'baseline' }}>
-                                                <View style={{ alignSelf: "stretch", flexDirection: 'row', flex: 1 }}>
-                                                    <View style={{ alignSelf: 'baseline' }}>
-                                                        <Avatar
-                                                            source={require('../assets/images/paypal.png')}
-                                                            size='small'
-                                                            overlayContainerStyle={{ backgroundColor: 'transparent' }}
-                                                        />
-                                                    </View>
-                                                    <View style={{ alignSelf: 'baseline' }}>
-                                                        <Text style={{ fontFamily: 'roboto-light', fontSize: 20, paddingLeft: 10 }}>Paypal</Text>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                        </View>
-
-                                        <View style={{ alignSelf: "center", flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-                                            <View style={{ alignSelf: 'baseline', width: '50%', marginTop: 20 }}>
-                                                <Button
-                                                    linearGradientProps={{
-                                                        colors: ['#d83f91', '#d0409b', '#c743a5', '#bb47af', '#ae4bb8'],
-                                                        start: { x: 0, y: 0.5 },
-                                                        end: { x: 1, y: 0.5 },
-                                                    }}
-                                                    color={theme.default.Button.primaryColor}
-                                                    buttonStyle={theme.default.Button.primary}
-                                                    title='Pay' />
-                                            </View>
-                                        </View>
-
-                                    </View>
-                                </ScrollView>
-                            </RBSheet>
-
-                        </View>
-
                     </View >
                 )
             })
@@ -371,15 +162,16 @@ export default class NewWishListScreen extends React.Component {
     updateList(index) {
         console.log(index, this.state)
         if (this.state.current === 'Organizer') {
-            let list = JSON.parse(JSON.stringify(this.state.organizers))
+            let list = JSON.parse(JSON.stringify(NewEvent.organizers))
             list[index].checked = !list[index].checked
-            this.setState({ organizers: list })
+            NewEvent.organizers = list
+            // this.setState({ organizers: list })
         } else {
-            let list = JSON.parse(JSON.stringify(this.state.contributors))
+            let list = JSON.parse(JSON.stringify(NewEvent.contributors))
             list[index].checked = !list[index].checked
-            this.setState({ contributors: list })
+            NewEvent.contributors = list
+            // this.setState({ contributors: list })
         }
-
     }
 
     renderPeopleList = ({ item }) => (
@@ -420,7 +212,6 @@ export default class NewWishListScreen extends React.Component {
 
 
     getAddOrganizer() {
-        // this.getSelectedOrganizers()
         return (
             <View style={{ marginTop: 30 }}>
                 <Text style={{ marginLeft: 10, paddingBottom: 10, marginBottom: 10, fontFamily: 'roboto-light', fontSize: 24, borderBottomWidth: 1, borderBottomColor: colors.greyOutline }}>Organizers</Text>
@@ -447,11 +238,9 @@ export default class NewWishListScreen extends React.Component {
         <ListItem
             key={item.index}
             pad={0}
-            // title={item.name}
             leftAvatar={{
                 source: item.avatar_url
             }}
-        // bottomDivider
         />
     )
 
@@ -522,28 +311,41 @@ export default class NewWishListScreen extends React.Component {
         console.log(result);
 
         if (!result.cancelled) {
-            this.setState({ image: result.uri });
+            NewEvent.image = result.uri
+            // this.setState({ image: result.uri });
         }
     };
 
+    navigateToItems() {
+        console.log("AddGifts")
+        this.props.navigation.navigate('AddGifts')
+    }
+
+
     getHomeScreem() {
         const [needed, total] = getAmount()
-        console.log(this.state.image)
+        // console.log(this.state.image)
         return (
             <View>
                 <ScrollView>
-                    {this.state.image ? <Tile
-                        // containerStyle={{ margin: 0, padding: 0 }}
+                    {NewEvent.image ? <Tile
                         icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
                         onPress={this.launchPicker.bind(this)}
-                        imageSrc={{ uri: this.state.image }}
+                        imageSrc={{ uri: NewEvent.image }}
                         feature
                     /> : <Tile
-                            // containerStyle={{ margin: 0, padding: 0 }}
-                            icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
-                            onPress={this.launchPicker.bind(this)}
-                            feature
-                        />}
+                        icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
+                        containerStyle={{ marginBottom: 20 }}
+                        contentContainerStyle={{ height: 70 }}
+                        onPress={this.launchPicker.bind(this)}
+                        feature
+                    >
+                            <View
+                                style={{ flex: 1, flexDirection: 'row' }}
+                            >
+                                <Text style={{ fontFamily: 'roboto-light' }}>*Choose a banner image</Text>
+                            </View>
+                        </Tile>}
                     <View style={{ marginLeft: 20, marginRight: 20 }}>
                         <View style={{ flexDirection: 'row', marginTop: -20, }}>
                             <View style={{ alignSelf: 'baseline' }}>
@@ -563,34 +365,21 @@ export default class NewWishListScreen extends React.Component {
                             </View>
                             <View style={{ alignSelf: 'baseline' }}>
                                 <Input
-                                    value={this.state.eventTitle}
+                                    value={NewEvent.title}
                                     containerStyle={{ width: 300 }}
                                     inputContainerStyle={{ marginBottom: 10 }}
                                     inputStyle={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 36 }}
                                     placeholder='Event Title'
                                     errorStyle={{ color: 'red' }}
                                     errorMessage=''
-                                    onChangeText={(e) => { this.setState({ eventTitle: e }) }}
+                                    onChangeText={(e) => { NewEvent.title = e }}
                                 />
-                                {/* <Text style={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 36 }}>
-                                    Baby Shower
-                                </Text> */}
+
                             </View>
                         </View>
-                        {/* <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', marginBottom: 10, marginTop: 10 }}>
-                            <Slider
-                                value={(total - needed) / total}
-                                animateTransitions={true}
-                                minimumTrackTintColor={theme.default.colors.secondary}
-                                thumbTintColor={theme.default.colors.primary}
-                                disabled={true}
-                            // onValueChange={value => this.setState({ value })}
-                            />
-                            <Text style={{ fontFamily: 'roboto-light', fontSize: 24 }}> ${needed} more needed </Text>
-                        </View> */}
+
                         <View>
                             <Input
-                                // containerStyle={{ width: 300 }}
                                 multiline={true}
                                 numberOfLines={4}
                                 inputContainerStyle={{ marginBottom: 10 }}
@@ -598,53 +387,66 @@ export default class NewWishListScreen extends React.Component {
                                 placeholder='Event Description'
                                 errorStyle={{ color: 'red' }}
                                 errorMessage=''
-                                value={this.state.description}
-                                onChangeText={(e) => { this.setState({ description: e }) }}
+                                value={NewEvent.description}
+                                onChangeText={(e) => { NewEvent.description = e }}
                             />
-                            {/* <Text style={{ marginLeft: 10, marginTop: 5, fontFamily: 'roboto-light', fontSize: 18 }}>
-                                This event is created for welcoming our new baby.
-                        </Text> */}
                         </View>
-
-                        {this.getOrganizerScreen(this.state.organizers, 'Organizer')}
-                        {/* <View style={{ marginTop: 30 }}>
-                            <Text style={{ marginLeft: 10, paddingBottom: 10, marginBottom: 10, fontFamily: 'roboto-light', fontSize: 24, borderBottomWidth: 1, borderBottomColor: colors.greyOutline }}>Organizers</Text>
-
-                            <Text style={{ fontFamily: 'roboto-light', fontSize: 18, marginTop: 10, marginBottom: 10, marginRight: 50, marginLeft: 50, textAlign: 'center' }}>Curators can donate to a pool but most importantly, they can select and prioritize gifts.</Text>
-                            <Button
-                                title="Invite Organizers"
-                                color={theme.default.Button.primaryColor}
-
-                                buttonStyle={{
-                                    height: 70,
-                                    width: 300,
-                                    marginLeft: 40,
-                                    marginBottom: 20
-
-                                }}
-                                onPress={(e) => { this.setState({ current: 'Organizer', header: 'Add Organizers' }) }}
+                        {/* 
+                        <View>
+                            <Input
+                                editable={false}
+                                inputContainerStyle={{ marginBottom: 10 }}
+                                inputStyle={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 18 }}
+                                placeholder='Event Description'
+                                errorStyle={{ color: 'red' }}
+                                errorMessage=''
+                                value={NewEvent.description}
+                                onPress={(e) => { this.showDatePicker.bind(this) }}
                             />
+                    
                         </View> */}
-                        {this.getOrganizerScreen(this.state.contributors, 'Contributor')}
-                        {/* <View style={{ marginTop: 30 }}>
-                            <Text style={{ marginLeft: 10, paddingBottom: 10, marginBottom: 10, fontFamily: 'roboto-light', fontSize: 24, borderBottomWidth: 1, borderBottomColor: colors.greyOutline }}>Contributors</Text>
 
-                            <Text style={{ fontFamily: 'roboto-light', fontSize: 18, marginTop: 10, marginBottom: 10, marginRight: 50, marginLeft: 50, textAlign: 'center' }}>Contributors can only donate to a pool but can’t select gifts.</Text>
-                            <Button
-                                title="Invite Contributors"
-                                color={theme.default.Button.primaryColor}
+                        {this.getOrganizerScreen(NewEvent.organizers, 'Organizer')}
+                        {this.getOrganizerScreen(NewEvent.contributors, 'Contributor')}
+                        <View style={{ marginTop: 30, marginBottom: 30 }}>
+                            <Text style={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 24, borderBottomWidth: 1, borderBottomColor: colors.greyOutline }}>Gifts</Text>
+                            <View>
+                                {this.productList()}
+                            </View>
+                            <View style={{
+                                alignItems: 'center', width: 'auto', height: 200, justifyContent: 'center',
+                                alignItems: 'center', borderRadius: 10, marginTop: 30, marginBottom: 20, borderWidth: 1,
+                                borderColor: theme.default.colors.grey5
+                            }}>
+                                <Avatar size="medium" onPress={this.navigateToItems.bind(this)} rounded overlayContainerStyle={{ backgroundColor: 'transparent' }} icon={{ name: 'pluscircleo', type: 'antdesign', size: 50, color: theme.default.colors.primary }} />
+                            </View>
+                            {
+                                Gift.newGifts.length ?
+                                    <Button
+                                        title="  Publish Event"
+                                        linearGradientProps={{
+                                            colors: ['#d83f91', '#d0409b', '#c743a5', '#bb47af', '#ae4bb8'],
+                                            start: { x: 0, y: 0.5 },
+                                            end: { x: 1, y: 0.5 },
+                                        }}
+                                        icon={
+                                            <Icon
+                                                name="md-rocket"
+                                                type="ionicon"
+                                                size={30}
+                                                color="white"
+                                            />
+                                        }
+                                        buttonStyle={{
+                                            height: 70,
+                                            width: 380,
+                                            marginTop: 20,
+                                            marginBottom: 20
 
-                                buttonStyle={{
-                                    height: 70,
-                                    width: 300,
-                                    marginLeft: 40
-
-                                }}
-                                onPress={(e) => { this.setState({ current: 'Contributor', header: 'Add Contributors' }) }}
-                            />
-                        </View> */}
-                        <View style={{ marginTop: 30 }}>
-                            {this.productList()}
+                                        }}
+                                    // onPress={(e) => { this.setState({ current: 'Contributor', header: 'Add Contributors' }) }}
+                                    /> : null
+                            }
                         </View>
                     </View>
                 </ScrollView>
@@ -654,8 +456,8 @@ export default class NewWishListScreen extends React.Component {
 
     render() {
         switch (this.state.current) {
-            case 'Organizer': return this.getPeopleScreen(this.state.organizers)
-            case 'Contributor': return this.getPeopleScreen(this.state.contributors)
+            case 'Organizer': return this.getPeopleScreen(NewEvent.organizers)
+            case 'Contributor': return this.getPeopleScreen(NewEvent.contributors)
             default: return this.getHomeScreem()
         }
     }

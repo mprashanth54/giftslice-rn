@@ -10,6 +10,8 @@ import Auth from "../stores/auth";
 // import styles from "./style";
 import theme from '../theme'
 const appID = "624136824831258"; // TODO: need to get for Facebook login
+const logo = require('../assets/images/App-Logo.png')
+
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -54,47 +56,6 @@ export default class LoginScreen extends React.Component {
         this.props.navigation.navigate("NewAccount");
     }
 
-    // render() {
-    //     return (
-    //         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-    //             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    //                 <View style={styles.loginScreenContainer}>
-    //                     <View>
-    //                         <Text style={styles.logoText}>GiftSlice</Text>
-    //                         <Text style={styles.logo}>
-    //                             The #1 most trusted gift pooling platform.
-    //           </Text>
-    //                         <TextInput
-    //                             placeholder="Username"
-    //                             placeholderColor="#c4c3cb"
-    //                             style={styles.loginFormTextInput}
-    //                         />
-    //                         <TextInput
-    //                             placeholder="Password"
-    //                             placeholderColor="#c4c3cb"
-    //                             style={styles.loginFormTextInput}
-    //                             secureTextEntry={true}
-    //                         />
-    //                         <Button
-    //                             buttonStyle={styles.loginButton}
-    //                             onPress={() => this.login()}
-    //                             title="Log In"
-    //                         />
-    //                         <Button
-    //                             buttonStyle={styles.loginButton}
-    //                             onPress={() => this.signup()}
-    //                             title="Create a New Account"
-    //                         />
-    //                         <Text style={styles.fbLoginButton} onPress={() => this.fblogin()}>
-    //                             Continue with Facebook
-    //           </Text>
-    //                     </View>
-    //                 </View>
-    //             </TouchableWithoutFeedback>
-    //         </KeyboardAvoidingView>
-    //     );
-    // }
-
     render() {
         return (
             <View style={styles.container}>
@@ -116,7 +77,7 @@ export default class LoginScreen extends React.Component {
                             elevation: 10,
                         }}>
                             <View style={{ width: 300, alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                                <Image source={require('../assets/images/App-Logo.png')}
+                                <Image source={logo}
                                     style={{ width: 200, height: 40 }} />
                             </View>
                             <Input
@@ -135,11 +96,7 @@ export default class LoginScreen extends React.Component {
                                 leftIcon={{ type: 'ant-design', name: 'lock', color: theme.colors.greyOutline }}
                                 leftIconContainerStyle={{ marginRight: 15 }}
                                 onChangeText={t => this.setState({ password: t })} />
-                            {this.state.loading ?
-                                <Button buttonStyle={theme.Button.primary} loading></Button> :
-                                <Button buttonStyle={theme.Button.primary} title='Login' onPress={this.login.bind(this)}></Button>
-                            }
-                            {/* <Button buttonStyle={theme.Button.primary} title='Login' onPress={this.login.bind(this)}></Button> */}
+                            <Button buttonStyle={theme.Button.primary} loading={this.state.loading} title='Login' onPress={this.login.bind(this)}></Button>
 
 
                             <View style={{ width: 300, alignItems: 'center', justifyContent: 'center' }}>

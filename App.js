@@ -34,6 +34,9 @@ export default function App(props) {
   }
 }
 
+
+
+
 async function loadResourcesAsync() {
   await Promise.all([
     Font.loadAsync({
@@ -43,38 +46,41 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       "roboto-light": require("./assets/fonts/Roboto-Light.ttf")
     }),
-    Asset.loadAsync([
-      require("./assets/images/account.png"),
-      require("./assets/images/credit-card.png"),
-      require("./assets/images/alarm.png"),
-      require("./assets/images/wallet.png"),
-      require("./assets/images/support.png"),
-      require("./assets/images/privacy.png"),
-      require("./assets/images/faq.png"),
-      require("./assets/images/logout.png"),
-      require("./assets/images/babyshower1.jpg"),
-      require("./assets/images/user2.jpg"),
-      require("./assets/images/engagement2.jpg"),
-      require("./assets/images/user3.jpg"),
-      require("./assets/images/housewarming4.jpg"),
-      require("./assets/images/user4.jpg"),
-      require("./assets/images/gamenight1.jpg"),
-      require("./assets/images/nyp3.jpg"),
-      require("./assets/images/user5.jpg"),
-      require("./assets/images/user6.jpg"),
-      require("./assets/images/babyshower3.jpg"),
-      require("./assets/images/user7.jpg"),
-      require("./assets/images/engagement3.jpg"),
-      require("./assets/images/user8.jpg"),
-      require("./assets/images/p1.jpeg"),
-      require("./assets/images/p2.jpeg"),
-      require("./assets/images/p3.jpeg"),
-      require("./assets/images/p4.jpeg"),
-      require("./assets/images/p5.jpeg"),
-      require("./assets/images/p6.jpeg"),
-      require("./assets/images/paypal.png"),
-      require("./assets/images/tick.png")
-    ])
+    Asset.loadAsync(
+      [
+        require('./assets/images/App-Logo.png'),
+        require("./assets/images/account.png"),
+        require("./assets/images/credit-card.png"),
+        require("./assets/images/alarm.png"),
+        require("./assets/images/wallet.png"),
+        require("./assets/images/support.png"),
+        require("./assets/images/privacy.png"),
+        require("./assets/images/faq.png"),
+        require("./assets/images/logout.png"),
+        require("./assets/images/babyshower1.jpg"),
+        require("./assets/images/user2.jpg"),
+        require("./assets/images/engagement2.jpg"),
+        require("./assets/images/user3.jpg"),
+        require("./assets/images/housewarming4.jpg"),
+        require("./assets/images/user4.jpg"),
+        require("./assets/images/gamenight1.jpg"),
+        require("./assets/images/nyp3.jpg"),
+        require("./assets/images/user5.jpg"),
+        require("./assets/images/user6.jpg"),
+        require("./assets/images/babyshower3.jpg"),
+        require("./assets/images/user7.jpg"),
+        require("./assets/images/engagement3.jpg"),
+        require("./assets/images/user8.jpg"),
+        require("./assets/images/p1.jpeg"),
+        require("./assets/images/p2.jpeg"),
+        require("./assets/images/p3.jpeg"),
+        require("./assets/images/p4.jpeg"),
+        require("./assets/images/p5.jpeg"),
+        require("./assets/images/p6.jpeg"),
+        require("./assets/images/paypal.png"),
+        require("./assets/images/tick.png")
+      ]
+    )
   ]);
 }
 
