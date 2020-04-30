@@ -1,8 +1,8 @@
 import React from "react";
 import { ListItem } from "react-native-elements";
-import { FlatList } from "react-native";
-import User from '../stores/user'
-import Auth from '../stores/auth'
+import { FlatList, Alert, Linking } from "react-native";
+import User from "../stores/user";
+import Auth from "../stores/auth";
 import { observer } from "mobx-react";
 
 const accountList = [
@@ -10,86 +10,119 @@ const accountList = [
     name: "Profile",
     avatar_url: require("../assets/images/account.png"),
     subtitle: User.info.name,
-    link: 'Profile'
+    link: "Profile",
   },
   {
     name: "Payment Cards",
     avatar_url: require("../assets/images/credit-card.png"),
     subtitle: "Venmo, Google Pay, Credit & Debit cards",
-    link: 'Payment'
+    link: "Payment",
   },
   {
     name: "Permissions",
     avatar_url: require("../assets/images/alarm.png"),
     subtitle: "Push & SMS",
-    link: 'Notification'
+    link: "Notification",
   },
   {
     name: "Wallet",
     avatar_url: require("../assets/images/wallet.png"),
     subtitle: "$6.52",
-    link: 'Wallet'
+    link: "Wallet",
   },
   {
     name: "Support",
     avatar_url: require("../assets/images/support.png"),
-    link: 'Support'
+    link: "Support",
   },
   {
     name: "Privacy",
     avatar_url: require("../assets/images/privacy.png"),
     subtitle: "Choose what data to share",
-    link: 'Privacy'
+    link: "Privacy",
   },
   {
     name: "Frequently Asked Questions",
     avatar_url: require("../assets/images/faq.png"),
-    link: 'FAQ'
+    link: "FAQ",
   },
   {
     name: "Log Out",
     avatar_url: require("../assets/images/logout.png"),
-    link: 'LogOut'
-  }
+    link: "LogOut",
+  },
 ];
-
 
 @observer
 export default class SettingsScreen extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
   }
 
+  logOutUser() {
+    console.log("logout button pressed");
+    Auth.authToken = "";
+    Alert.alert(
+      "Log Out?",
+      "This will log you out on all devices",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => this.props.navigation.navigate("Login") },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  contactSupport() {
+    console.log("contact support button pressed");
+    Linking.openURL(
+      "mailto:giftslicesupport@andrew.cmu.edu?subject=App Support&body=Insert Text Here"
+    );
+  }
 
   keyExtractor = (item, index) => index.toString();
 
   handleClick = (link) => {
     switch (link) {
-      case 'Profile': this.props.navigation.navigate('Profile')
+      case 'Profile': {
+        this.props.navigation.navigate('Profile')
+        break
+      }
       case 'Notification': {
         this.props.navigation.navigate('Permission')
-        break;
+        break
       }
-      case 'LogOut': {
-        Auth.authToken = ''
-        this.props.navigation.navigate('Login')
+      case "Profile": {
+        this.props.navigation.navigate("Profile");
+        break
       }
+      case "Support":
+        this.contactSupport();
+        break
+      case "LogOut":
+        this.logOutUser();
+        break
     }
-  }
+  };
 
   renderItem = ({ item }) => (
     <ListItem
       title={item.name}
       subtitle={item.subtitle}
       leftAvatar={{
-        source: item.avatar_url
+        source: item.avatar_url,
       }}
-      onPress={(e) => { this.handleClick(item.link) }}
+      onPress={(e) => {
+        this.handleClick(item.link);
+      }}
       bottomDivider
       chevron
     />
-  )
+  );
 
   render() {
     return (
@@ -100,9 +133,8 @@ export default class SettingsScreen extends React.Component {
       />
     );
   }
-
 }
 
 SettingsScreen.navigationOptions = {
-  title: "Account"
+  title: "Account",
 };
