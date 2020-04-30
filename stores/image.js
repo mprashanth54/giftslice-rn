@@ -6,13 +6,14 @@ import Auth from './auth'
 class ImageService {
 
     @action
-    async uploadFile(formData) {
+    async uploadFile(result) {
         try {
-            // const bodyFormData = new FormData()
-            // console.log(file)
-            // bodyFormData.append('file', file)
+            const formData = new FormData()
+            let uriParts = result.uri.split('.');
+            let fileName = uriParts[uriParts.length - 1];
+            result.name = `Profile.${fileName}`
+            formData.append('file', result)
             const resp = await axios.post('/uploads', formData, { headers: { token: Auth.authToken, 'Content-Type': 'multipart/form-data' } })
-            console.log(resp)
             return resp.data.name
         } catch (err) {
             console.log(err)
