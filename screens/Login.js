@@ -7,6 +7,7 @@ import Auth from "../stores/auth";
 import theme from "../theme";
 const appID = "624136824831258"; // TODO: need to get for Facebook login
 const logo = require("../assets/images/App-Logo.png");
+import User from '../stores/user'
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -28,7 +29,10 @@ export default class LoginScreen extends React.Component {
     const { email, password } = this.state;
     const isValid = await Auth.login(email, password);
     this.setState({ loading: false });
-    if (isValid) this.props.navigation.navigate("Main");
+    if (isValid) {
+      User.getUserInfo()
+      this.props.navigation.navigate("Main");
+    }
     // CHANGE BACK TO: else this.setState({ error: "Invalid Credentials" });
     else this.props.navigation.navigate("Main");
   }
