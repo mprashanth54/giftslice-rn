@@ -8,7 +8,7 @@ import MyWishListScreen from "../screens/MyWishList"
 import MainTabNavigator from "./MainTabNavigator";
 import AddGifts from "../screens/AddGifts";
 import Profile from "../screens/Profile"
-
+import PermissionScreen from '../screens/PermissionScreen'
 // import AddWishListNavigator from './AddWishListNavigator'
 // import AddWishList from '.'
 
@@ -23,7 +23,8 @@ export default createAppContainer(
       NewAccount: NewAccount,
       VerifyAccount: VerifyAccount,
       AddGifts: AddGifts,
-      Profile: Profile
+      Profile: Profile,
+      Permission: PermissionScreen
       // New: AddWishListNavigator
     },
     {
