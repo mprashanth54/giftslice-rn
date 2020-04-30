@@ -10,11 +10,9 @@ import AddGifts from "../screens/AddGifts";
 import Profile from "../screens/Profile"
 import PermissionScreen from '../screens/PermissionScreen'
 import SuccessScreen from '../screens/SuccessScreen'
-import Profile from "../screens/Profile";
 import FAQ from "../screens/FAQScreen";
 
-// import AddWishListNavigator from './AddWishListNavigator'
-// import AddWishList from '.'
+import AddWishListNavigator from './AddWishListNavigator'
 
 export default createAppContainer(
   createSwitchNavigator(
@@ -31,7 +29,7 @@ export default createAppContainer(
       Permission: PermissionScreen,
       Success: SuccessScreen,
       FAQ: FAQ,
-      // New: AddWishListNavigator
+      New: AddWishListNavigator
     },
     {
       initialRouteName: "Login",
