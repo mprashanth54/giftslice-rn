@@ -22,7 +22,7 @@ const accountList = [
     name: "Permissions",
     avatar_url: require("../assets/images/alarm.png"),
     subtitle: "Push & SMS",
-    link: "Notification",
+    link: "Permission",
   },
   {
     name: "Wallet",
@@ -92,20 +92,18 @@ export default class SettingsScreen extends React.Component {
         this.props.navigation.navigate('Profile')
         break
       }
-      case 'Notification': {
+      case 'Permission': {
         this.props.navigation.navigate('Permission')
         break
       }
-      case "Profile": {
-        this.props.navigation.navigate("Profile");
-        break
-      }
-      case "Support":
+      case "Support": {
         this.contactSupport();
         break
-      case "LogOut":
+      }
+      case "LogOut": {
         this.logOutUser();
         break
+      }
     }
   };
 
