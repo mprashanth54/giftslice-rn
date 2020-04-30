@@ -64,7 +64,7 @@ export default class SettingsScreen extends React.Component {
     Auth.authToken = "";
     Alert.alert(
       "Log Out?",
-      "This will log you out on all devices",
+      "Are you sure?",
       [
         {
           text: "Cancel",
