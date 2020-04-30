@@ -30,7 +30,7 @@ export default class LoginScreen extends React.Component {
     const isValid = await Auth.login(email, password);
     this.setState({ loading: false });
     if (isValid) {
-      User.getUserInfo()
+      await User.getUserInfo()
       this.props.navigation.navigate("Main");
     }
     // CHANGE BACK TO: else this.setState({ error: "Invalid Credentials" });

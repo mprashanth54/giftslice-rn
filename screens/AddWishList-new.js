@@ -15,6 +15,7 @@ import * as theme from '../theme'
 import AnimatedProgressWheel from 'react-native-progress-wheel'
 import RBSheet from "react-native-raw-bottom-sheet";
 import Gift from '../stores/gifts';
+import User from '../stores/user'
 import NewEvent from '../stores/NewEvent'
 import { observer } from 'mobx-react';
 // import DateTimePickerModal from "react-native-modal-datetime-picker"
@@ -323,8 +324,6 @@ export default class NewWishListScreen extends React.Component {
 
 
     getHomeScreem() {
-        const [needed, total] = getAmount()
-        // console.log(this.state.image)
         return (
             <View>
                 <ScrollView>
@@ -349,19 +348,33 @@ export default class NewWishListScreen extends React.Component {
                     <View style={{ marginLeft: 20, marginRight: 20 }}>
                         <View style={{ flexDirection: 'row', marginTop: -20, }}>
                             <View style={{ alignSelf: 'baseline' }}>
-                                <Avatar
-                                    rounded
-                                    containerStyle={{
-                                        shadowColor: '#a5a5a5',
-                                        shadowOpacity: 0.9,
-                                        elevation: 3,
-                                        shadowRadius: 15,
-                                        shadowOffset: { width: 5, height: 3 }
-                                    }}
-                                    iconStyle={{ marginLeft: 10, marginRight: 10, }}
-                                    size='medium'
-                                    source={require('../assets/images/user2.jpg')}
-                                />
+                                {
+                                    User.info.image ?
+                                        <Avatar
+                                            rounded
+                                            containerStyle={{
+                                                shadowColor: '#a5a5a5',
+                                                shadowOpacity: 0.9,
+                                                elevation: 3,
+                                                shadowRadius: 15,
+                                                shadowOffset: { width: 5, height: 3 }
+                                            }}
+                                            iconStyle={{ marginLeft: 10, marginRight: 10, }}
+                                            size='medium'
+                                            source={{ uri: User.info.image }} /> :
+                                        <Avatar
+                                            rounded
+                                            containerStyle={{
+                                                shadowColor: '#a5a5a5',
+                                                shadowOpacity: 0.9,
+                                                elevation: 3,
+                                                shadowRadius: 15,
+                                                shadowOffset: { width: 5, height: 3 }
+                                            }}
+                                            iconStyle={{ marginLeft: 10, marginRight: 10, }}
+                                            size='medium'
+                                            source={require('../assets/images/account.png')} />
+                                }
                             </View>
                             <View style={{ alignSelf: 'baseline' }}>
                                 <Input
@@ -391,20 +404,6 @@ export default class NewWishListScreen extends React.Component {
                                 onChangeText={(e) => { NewEvent.description = e }}
                             />
                         </View>
-                        {/* 
-                        <View>
-                            <Input
-                                editable={false}
-                                inputContainerStyle={{ marginBottom: 10 }}
-                                inputStyle={{ marginLeft: 10, fontFamily: 'roboto-light', fontSize: 18 }}
-                                placeholder='Event Description'
-                                errorStyle={{ color: 'red' }}
-                                errorMessage=''
-                                value={NewEvent.description}
-                                onPress={(e) => { this.showDatePicker.bind(this) }}
-                            />
-                    
-                        </View> */}
 
                         {this.getOrganizerScreen(NewEvent.organizers, 'Organizer')}
                         {this.getOrganizerScreen(NewEvent.contributors, 'Contributor')}
