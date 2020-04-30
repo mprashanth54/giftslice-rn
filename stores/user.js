@@ -5,6 +5,13 @@ import Auth from './auth'
 
 class User {
     @observable info = {}
+    @observable permissions = {
+        camera: false,
+        files: true,
+        sms: false,
+        push_notification: false
+    }
+
 
     @action
     async getUserInfo() {

@@ -19,7 +19,7 @@ const accountList = [
     link: 'Payment'
   },
   {
-    name: "Notifications",
+    name: "Permissions",
     avatar_url: require("../assets/images/alarm.png"),
     subtitle: "Push & SMS",
     link: 'Notification'
@@ -67,6 +67,10 @@ export default class SettingsScreen extends React.Component {
   handleClick = (link) => {
     switch (link) {
       case 'Profile': this.props.navigation.navigate('Profile')
+      case 'Notification': {
+        this.props.navigation.navigate('Permission')
+        break;
+      }
       case 'LogOut': {
         Auth.authToken = ''
         this.props.navigation.navigate('Login')
