@@ -1,12 +1,15 @@
 import React from "react";
 import { ListItem } from "react-native-elements";
 import { FlatList, Alert, Linking } from "react-native";
+import User from "../stores/user";
+import Auth from "../stores/auth";
+import { observer } from "mobx-react";
 
 const accountList = [
   {
     name: "Profile",
     avatar_url: require("../assets/images/account.png"),
-    subtitle: "John Doe",
+    subtitle: User.info.name,
     link: "Profile",
   },
   {
@@ -50,6 +53,7 @@ const accountList = [
   },
 ];
 
+@observer
 export default class SettingsScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -57,6 +61,7 @@ export default class SettingsScreen extends React.Component {
 
   logOutUser() {
     console.log("logout button pressed");
+    Auth.authToken = "";
     Alert.alert(
       "Log Out?",
       "This will log you out on all devices",
@@ -82,7 +87,6 @@ export default class SettingsScreen extends React.Component {
   keyExtractor = (item, index) => index.toString();
 
   handleClick = (link) => {
-    console.log(link);
     switch (link) {
       case "Profile":
         this.props.navigation.navigate("Profile");
