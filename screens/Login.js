@@ -7,7 +7,7 @@ import Auth from "../stores/auth";
 import theme from "../theme";
 const appID = "624136824831258"; // TODO: need to get for Facebook login
 const logo = require("../assets/images/App-Logo.png");
-import User from '../stores/user'
+import User from "../stores/user";
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -134,6 +134,20 @@ export default class LoginScreen extends React.Component {
                 leftIconContainerStyle={{ marginRight: 15 }}
                 onChangeText={(t) => this.setState({ password: t })}
               />
+              <Text>
+                By continuing to use GiftSlice, you are agreeing to GiftSlice's{" "}
+                <Text
+                  style={{ color: "blue" }}
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://docs.google.com/document/d/19RUsMikhBJX5Va6BCBWvherc3SROokjc0Ay9NgWTda4/edit#://google.com"
+                    )
+                  }
+                >
+                  Terms and Privacy Policy{"\n"}
+                </Text>
+              </Text>
+
               <Button
                 buttonStyle={theme.Button.primary}
                 loading={this.state.loading}
@@ -185,21 +199,6 @@ export default class LoginScreen extends React.Component {
                 />
               </View>
             </View>
-          </View>
-          <View style={styles.bottomView}>
-            <Text style={styles.footer}>
-              By continuing to use GiftSlice, you are agreeing to GiftSlice's{" "}
-              <Text
-                style={{ color: "blue" }}
-                onPress={() =>
-                  Linking.openURL(
-                    "https://docs.google.com/document/d/19RUsMikhBJX5Va6BCBWvherc3SROokjc0Ay9NgWTda4/edit#://google.com"
-                  )
-                }
-              >
-                Terms and Privacy Policy
-              </Text>
-            </Text>
           </View>
         </ImageBackground>
       </View>

@@ -178,5 +178,5 @@ export default class Profile extends React.Component {
 }
 
 Profile.navigationOptions = {
-    title: "Profile"
+    title: "Profile",
 };
