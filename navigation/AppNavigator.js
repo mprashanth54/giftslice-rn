@@ -4,11 +4,13 @@ import { createStackNavigator } from "react-navigation-stack";
 import LoginScreen from "../screens/Login";
 import NewAccount from "../screens/NewAccount";
 import VerifyAccount from "../screens/VerifyAccount";
-import MyWishListScreen from "../screens/MyWishList"
+import MyWishListScreen from "../screens/MyWishList";
 import MainTabNavigator from "./MainTabNavigator";
 import AddGifts from "../screens/AddGifts";
-import Profile from "../screens/Profile"
-import PermissionScreen from '../screens/PermissionScreen'
+import Profile from "../screens/Profile";
+import PermissionScreen from "../screens/PermissionScreen";
+import FAQ from "../screens/FAQScreen";
+
 // import AddWishListNavigator from './AddWishListNavigator'
 // import AddWishList from '.'
 
@@ -24,11 +26,12 @@ export default createAppContainer(
       VerifyAccount: VerifyAccount,
       AddGifts: AddGifts,
       Profile: Profile,
-      Permission: PermissionScreen
+      Permission: PermissionScreen,
+      FAQ: FAQ,
       // New: AddWishListNavigator
     },
     {
-      initialRouteName: "Login"
+      initialRouteName: "Login",
     }
   )
 );

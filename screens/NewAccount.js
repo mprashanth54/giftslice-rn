@@ -145,6 +145,20 @@ export default class NewAccount extends React.Component {
                 onChangeText={(t) => this.setState({ password: t })}
               />
 
+              <Text>
+                By signing up to use GiftSlice, you are agreeing to GiftSlice's{" "}
+                <Text
+                  style={{ color: "blue" }}
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://docs.google.com/document/d/19RUsMikhBJX5Va6BCBWvherc3SROokjc0Ay9NgWTda4/edit#://google.com"
+                    )
+                  }
+                >
+                  Terms and Privacy Policy{"\n"}
+                </Text>
+              </Text>
+
               <Button
                 buttonStyle={theme.Button.primary}
                 title="Sign Up"
@@ -194,21 +208,6 @@ export default class NewAccount extends React.Component {
                 />
               </View>
             </View>
-          </View>
-          <View style={styles.bottomView}>
-            <Text style={styles.footer}>
-              By continuing to use GiftSlice, you are agreeing to GiftSlice's{" "}
-              <Text
-                style={{ color: "blue" }}
-                onPress={() =>
-                  Linking.openURL(
-                    "https://docs.google.com/document/d/19RUsMikhBJX5Va6BCBWvherc3SROokjc0Ay9NgWTda4/edit#://google.com"
-                  )
-                }
-              >
-                Terms and Privacy Policy
-              </Text>
-            </Text>
           </View>
         </ImageBackground>
       </View>

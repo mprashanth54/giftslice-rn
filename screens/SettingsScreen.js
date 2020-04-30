@@ -88,21 +88,25 @@ export default class SettingsScreen extends React.Component {
 
   handleClick = (link) => {
     switch (link) {
-      case 'Profile': {
-        this.props.navigation.navigate('Profile')
-        break
+      case "Profile": {
+        this.props.navigation.navigate("Profile");
+        break;
       }
-      case 'Permission': {
-        this.props.navigation.navigate('Permission')
-        break
+      case "Permission": {
+        this.props.navigation.navigate("Permission");
+        break;
       }
       case "Support": {
         this.contactSupport();
-        break
+        break;
+      }
+      case "FAQ": {
+        this.props.navigation.navigate("FAQ");
+        break;
       }
       case "LogOut": {
         this.logOutUser();
-        break
+        break;
       }
     }
   };
