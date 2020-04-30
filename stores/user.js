@@ -1,7 +1,6 @@
 import { observable, action, computed, toJS } from "mobx"
 import axios from '../axios'
 import Auth from './auth'
-// import { observer } from 'mobx-react'
 
 class User {
     @observable info = {}
@@ -26,6 +25,21 @@ class User {
     async updateImage(file) {
         await axios.put('/users/me/image', { image: file }, { headers: { token: Auth.authToken } })
         await this.getUserInfo()
+    }
+
+    async updatePassword(oldPass, newPass) {
+        try {
+            await axios.post('/users/change-password', {
+                oldPassword: oldPass,
+                newPassword: newPass
+            },
+                { headers: { token: Auth.authToken } }
+            )
+            return true
+        } catch (err) {
+            return false
+        }
+
     }
 }
 

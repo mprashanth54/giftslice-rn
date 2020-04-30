@@ -5,58 +5,107 @@ import User from "../stores/user";
 import Auth from "../stores/auth";
 import { observer } from "mobx-react";
 
-const accountList = [
-  {
-    name: "Profile",
-    avatar_url: require("../assets/images/account.png"),
-    subtitle: User.info.name,
-    link: "Profile",
-  },
-  {
-    name: "Payment Cards",
-    avatar_url: require("../assets/images/credit-card.png"),
-    subtitle: "Venmo, Google Pay, Credit & Debit cards",
-    link: "Payment",
-  },
-  {
-    name: "Permissions",
-    avatar_url: require("../assets/images/alarm.png"),
-    subtitle: "Push & SMS",
-    link: "Permission",
-  },
-  {
-    name: "Wallet",
-    avatar_url: require("../assets/images/wallet.png"),
-    subtitle: "$6.52",
-    link: "Wallet",
-  },
-  {
-    name: "Support",
-    avatar_url: require("../assets/images/support.png"),
-    link: "Support",
-  },
-  {
-    name: "Privacy",
-    avatar_url: require("../assets/images/privacy.png"),
-    subtitle: "Choose what data to share",
-    link: "Privacy",
-  },
-  {
-    name: "Frequently Asked Questions",
-    avatar_url: require("../assets/images/faq.png"),
-    link: "FAQ",
-  },
-  {
-    name: "Log Out",
-    avatar_url: require("../assets/images/logout.png"),
-    link: "LogOut",
-  },
-];
+// const accountList = [
+//   {
+//     name: "Profile",
+//     avatar_url: require("../assets/images/account.png"),
+//     subtitle: User.info.name,
+//     link: "Profile",
+//   },
+//   {
+//     name: "Payment Cards",
+//     avatar_url: require("../assets/images/credit-card.png"),
+//     subtitle: "Venmo, Google Pay, Credit & Debit cards",
+//     link: "Payment",
+//   },
+//   {
+//     name: "Permissions",
+//     avatar_url: require("../assets/images/alarm.png"),
+//     subtitle: "Push & SMS",
+//     link: "Permission",
+//   },
+//   {
+//     name: "Wallet",
+//     avatar_url: require("../assets/images/wallet.png"),
+//     subtitle: "$6.52",
+//     link: "Wallet",
+//   },
+//   {
+//     name: "Support",
+//     avatar_url: require("../assets/images/support.png"),
+//     link: "Support",
+//   },
+//   {
+//     name: "Privacy",
+//     avatar_url: require("../assets/images/privacy.png"),
+//     subtitle: "Choose what data to share",
+//     link: "Privacy",
+//   },
+//   {
+//     name: "Frequently Asked Questions",
+//     avatar_url: require("../assets/images/faq.png"),
+//     link: "FAQ",
+//   },
+//   {
+//     name: "Log Out",
+//     avatar_url: require("../assets/images/logout.png"),
+//     link: "LogOut",
+//   },
+// ];
 
 @observer
 export default class SettingsScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      accountList: [
+        {
+          name: "Profile",
+          avatar_url: require("../assets/images/account.png"),
+          subtitle: User.info.name,
+          link: "Profile",
+        },
+        {
+          name: "Payment Cards",
+          avatar_url: require("../assets/images/credit-card.png"),
+          subtitle: "Venmo, Google Pay, Credit & Debit cards",
+          link: "Payment",
+        },
+        {
+          name: "Permissions",
+          avatar_url: require("../assets/images/alarm.png"),
+          subtitle: "Push & SMS",
+          link: "Permission",
+        },
+        {
+          name: "Wallet",
+          avatar_url: require("../assets/images/wallet.png"),
+          subtitle: "$6.52",
+          link: "Wallet",
+        },
+        {
+          name: "Support",
+          avatar_url: require("../assets/images/support.png"),
+          link: "Support",
+        },
+        {
+          name: "Privacy",
+          avatar_url: require("../assets/images/privacy.png"),
+          subtitle: "Choose what data to share",
+          link: "Privacy",
+        },
+        {
+          name: "Frequently Asked Questions",
+          avatar_url: require("../assets/images/faq.png"),
+          link: "FAQ",
+        },
+        {
+          name: "Log Out",
+          avatar_url: require("../assets/images/logout.png"),
+          link: "LogOut",
+        },
+      ]
+    }
   }
 
   logOutUser() {
@@ -100,10 +149,10 @@ export default class SettingsScreen extends React.Component {
         this.contactSupport();
         break
       }
-      case "LogOut": {
-        this.logOutUser();
-        break
-      }
+      // case "LogOut": {
+      //   this.logOutUser();
+      //   break
+      // }
     }
   };
 
@@ -123,10 +172,11 @@ export default class SettingsScreen extends React.Component {
   );
 
   render() {
+    // console.log(User.info)
     return (
       <FlatList
         keyExtractor={this.keyExtractor.bind(this)}
-        data={accountList}
+        data={this.state.accountList}
         renderItem={this.renderItem.bind(this)}
       />
     );
