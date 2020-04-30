@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 const instance = axios.create({
     baseURL: 'https://giftslice.herokuapp.com',
-    timeout: 10000
+    timeout: 20000
 });
 
 export default instance
