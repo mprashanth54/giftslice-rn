@@ -2,11 +2,8 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Avatar, Header, Input } from "react-native-elements";
 import * as theme from "../theme";
-import * as ImagePicker from "expo-image-picker";
 import { observer } from "mobx-react";
 import User from "../stores/user";
-import ImageService from "../stores/image";
-import { Separator } from "native-base";
 import {
   Collapse,
   CollapseHeader,
@@ -66,18 +63,20 @@ export default class FAQ extends React.Component {
 
   _head(item) {
     return (
-      <Separator
+      <View
         bordered
         style={{
           alignItems: "center",
           padding: 10,
           height: 60,
+          backgroundColor: "floralwhite",
+          borderColor: "black",
           flex: 1,
           flexWrap: "wrap",
         }}
       >
         <Text style={{ fontSize: 17 }}>{item.title}</Text>
-      </Separator>
+      </View>
     );
   }
 
