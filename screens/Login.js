@@ -17,8 +17,8 @@ export default class LoginScreen extends React.Component {
     console.log("I'm in Login");
     this.state = {
       loading: false,
-      email: "m.prashanth54@gmail.com",
-      password: "Test@@123",
+      email: "",
+      password: "",
       error: "",
     };
   }
