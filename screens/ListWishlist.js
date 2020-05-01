@@ -5,7 +5,7 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import { Card, Button, Text, Avatar, SearchBar } from 'react-native-elements'
+import { Card, Button, Text, Avatar, Image } from 'react-native-elements'
 import * as theme from '../theme'
 import moment from 'moment'
 import Campaign from '../stores/campaign'
@@ -173,11 +173,16 @@ export default class ListWishlist extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView
+                {Campaign.myCampaigns.length ? <ScrollView
                     style={styles.container}
                     contentContainerStyle={styles.contentContainer}>
                     {this.campaignContent(Campaign.myCampaigns)}
-                </ScrollView>
+                </ScrollView> :
+                    <Image
+                        source={require('../assets/images/home.png')}
+                        style={{ width: 'auto', height: 780, resizeMode: 'cover' }}
+                    />}
+
             </View>
         )
     }
