@@ -9,6 +9,7 @@ import LinksScreen from '../screens/LinksScreen';
 import NotificationScreen from '../screens/NotificationScreen'
 import SettingsScreen from '../screens/SettingsScreen';
 import MyWishListScreen from '../screens/MyWishList'
+import ListWishlist from '../screens/ListWishlist'
 import EditWishListScreen from '../screens/EditWishList'
 import * as theme from '../theme'
 import { Text } from 'react-native-elements'
@@ -115,7 +116,7 @@ AddStack.path = 'Add';
 
 const CampaignStack = createStackNavigator(
   {
-    Campaign: MyWishListScreen,
+    Campaign: ListWishlist,
     // Campaign: EditWishListScreen
   },
   config

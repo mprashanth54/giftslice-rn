@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { setState, state } from 'react';
 import {
   Platform,
@@ -8,57 +7,58 @@ import {
   Dimensions,
   BackHandler
 } from 'react-native';
-import { Card, Button, Text, Avatar, SearchBar } from 'react-native-elements'
+import { Card, Button, Text, Avatar, SearchBar, Image } from 'react-native-elements'
 import * as theme from '../theme'
 import moment from 'moment'
 // import RBSheet from "react-native-raw-bottom-sheet";
 import Modal from "react-native-modal";
 import MyWishListScreen from './MyWishList'
+import Campaign from '../stores/campaign'
 
-const campaigns = [
-  {
-    c_image: require('../assets/images/babyshower1.jpg'),
-    u_image: require('../assets/images/user2.jpg'),
-    event: 'Baby Shower',
-    end: moment().add(1, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/engagement2.jpg'),
-    u_image: require('../assets/images/user3.jpg'),
-    event: 'Engagement',
-    end: moment().add(5, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/housewarming4.jpg'),
-    u_image: require('../assets/images/user4.jpg'),
-    event: 'Housewarming',
-    end: moment().add(3, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/nyp3.jpg'),
-    u_image: require('../assets/images/user5.jpg'),
-    event: 'Ney Year Party',
-    end: moment().add(10, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/gamenight1.jpg'),
-    u_image: require('../assets/images/user6.jpg'),
-    event: 'Game Night',
-    end: moment().add(1, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/babyshower3.jpg'),
-    u_image: require('../assets/images/user7.jpg'),
-    event: 'Baby Shower',
-    end: moment().add(2, 'days').calendar()
-  },
-  {
-    c_image: require('../assets/images/engagement3.jpg'),
-    u_image: require('../assets/images/user8.jpg'),
-    event: 'Engagement',
-    end: moment().add(3, 'days').calendar()
-  },
-]
+// const campaigns = [
+//   {
+//     c_image: require('../assets/images/babyshower1.jpg'),
+//     u_image: require('../assets/images/user2.jpg'),
+//     event: 'Baby Shower',
+//     end: moment().add(1, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/engagement2.jpg'),
+//     u_image: require('../assets/images/user3.jpg'),
+//     event: 'Engagement',
+//     end: moment().add(5, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/housewarming4.jpg'),
+//     u_image: require('../assets/images/user4.jpg'),
+//     event: 'Housewarming',
+//     end: moment().add(3, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/nyp3.jpg'),
+//     u_image: require('../assets/images/user5.jpg'),
+//     event: 'Ney Year Party',
+//     end: moment().add(10, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/gamenight1.jpg'),
+//     u_image: require('../assets/images/user6.jpg'),
+//     event: 'Game Night',
+//     end: moment().add(1, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/babyshower3.jpg'),
+//     u_image: require('../assets/images/user7.jpg'),
+//     event: 'Baby Shower',
+//     end: moment().add(2, 'days').calendar()
+//   },
+//   {
+//     c_image: require('../assets/images/engagement3.jpg'),
+//     u_image: require('../assets/images/user8.jpg'),
+//     event: 'Engagement',
+//     end: moment().add(3, 'days').calendar()
+//   },
+// ]
 
 
 export default class HomeScreen extends React.Component {
@@ -71,21 +71,24 @@ export default class HomeScreen extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    await Campaign.getHomeContent()
+  }
+
   updateSearch = (search) => {
     this.setState({ search: search })
-
   }
 
   updateView = () => {
     this.setState({ view: !this.state.view })
   }
 
-  campaignContent = () => {
+  campaignContent = (campaigns) => {
     return campaigns.map((campaign, i) => {
       return (
         <Card
-          key={i}
-          image={campaign.c_image}
+          key={campaign._id}
+          image={{ uri: campaign.image }}
           imageStyle={{ height: 400, width: 'auto' }}
           containerStyle={theme.default.Card.containerStyle}
         >
@@ -104,12 +107,12 @@ export default class HomeScreen extends React.Component {
                 }}
                 iconStyle={{ marginLeft: 10, marginRight: 10, }}
                 size='medium'
-                source={campaign.u_image}
+                source={{ uri: campaign.u_image }}
               />
             </View>
             <View style={{ alignSelf: 'baseline' }}>
               <Text style={{ margin: 10, fontFamily: 'roboto-light', fontSize: 36 }}>
-                {campaign.event}
+                {campaign.title}
               </Text>
             </View>
 
@@ -124,7 +127,7 @@ export default class HomeScreen extends React.Component {
             <View style={{ alignSelf: 'baseline', width: '50%' }}>
               {/* <View> */}
               <Text style={{ margin: 10, fontFamily: 'roboto-light' }}>
-                {campaign.end}
+                {moment(campaign.endDate).calendar()}
               </Text>
               {/* </View> */}
             </View>
@@ -177,7 +180,7 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           {this.searchBar()}
-          {this.campaignContent()}
+          {this.campaignContent(Campaign.allCampaigns)}
         </ScrollView>
       </View>
     )
@@ -200,10 +203,23 @@ export default class HomeScreen extends React.Component {
   //   BackHandler.removeEventListener('hardwareBackPress')
   // }
 
+
+  bannerScreen() {
+    return (
+      <View style={{ flex: 1, flexDirection: 'column', marginTop: -20 }}>
+        <Image
+          source={require('../assets/images/home.png')}
+          style={{ width: 'auto', height: 780, resizeMode: 'cover' }}
+        />
+      </View>
+    )
+  }
+
   render() {
     return (
-      this.state.view ? this.viewScreen() : this.viewHomeScreen()
-
+      Campaign.allCampaigns.length ?
+        (this.state.view ? this.viewScreen() : this.viewHomeScreen()) :
+        this.bannerScreen()
     )
   }
 

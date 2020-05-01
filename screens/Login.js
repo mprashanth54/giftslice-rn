@@ -8,6 +8,7 @@ import theme from "../theme";
 const appID = "624136824831258"; // TODO: need to get for Facebook login
 const logo = require("../assets/images/App-Logo.png");
 import User from "../stores/user";
+import Campaign from '../stores/campaign'
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -16,8 +17,8 @@ export default class LoginScreen extends React.Component {
     console.log("I'm in Login");
     this.state = {
       loading: false,
-      email: "",
-      password: "",
+      email: "m.prashanth54@gmail.com",
+      password: "Test@@123",
       error: "",
     };
   }
@@ -30,11 +31,14 @@ export default class LoginScreen extends React.Component {
     const isValid = await Auth.login(email, password);
     this.setState({ loading: false });
     if (isValid) {
-      await User.getUserInfo()
+      await Promise.all([User.getUserInfo(), Campaign.getHomeContent(), Campaign.getMyCampaigns()])
       this.props.navigation.navigate("Main");
+    } else {
+      this.setState({ error: "Invalid Credentials" });
     }
-    // CHANGE BACK TO: else this.setState({ error: "Invalid Credentials" });
-    else this.props.navigation.navigate("Main");
+    // CHANGE BACK TO: else 
+
+    // else this.props.navigation.navigate("Main");
   }
 
   async fblogin() {

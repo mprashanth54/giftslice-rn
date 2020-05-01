@@ -15,6 +15,16 @@ class Auth {
             return false
         }
     }
+
+    async register(registrationData) {
+        try {
+            await axios.post('/auth/register', registrationData)
+            return true
+        } catch (err) {
+            console.log(err)
+            return false
+        }
+    }
 }
 
 export default new Auth()

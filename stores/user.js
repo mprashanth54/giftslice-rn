@@ -11,6 +11,8 @@ class User {
         push_notification: false
     }
 
+    @observable global = []
+
 
     @action
     async getUserInfo() {
@@ -38,6 +40,17 @@ class User {
             return true
         } catch (err) {
             return false
+        }
+    }
+
+    async getGlobal() {
+        try {
+            console.log("Auth ", Auth.authToken)
+            const res = await axios.get('/users', { headers: { token: Auth.authToken } })
+            // console.log(res)
+            return res.data.users
+        } catch (err) {
+            console.log(err.message)
         }
 
     }

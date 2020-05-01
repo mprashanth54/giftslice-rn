@@ -2,6 +2,7 @@ import React from "react";
 import { View, Alert, ImageBackground, Linking } from "react-native";
 import { Button, Input, Image, Text } from "react-native-elements";
 import theme from "../theme";
+import Auth from '../stores/auth'
 
 export default class NewAccount extends React.Component {
   constructor(props) {
@@ -17,7 +18,15 @@ export default class NewAccount extends React.Component {
 
   async signup() {
     const { name, email, password, mobile } = this.state;
-    // this.props.navigation.navigate("VerifyAccount");
+    const registerationData = {
+      name: name,
+      email: email,
+      pass: password,
+      mobile: mobile
+    }
+    const success = await Auth.register(registerationData)
+    if (success) this.props.navigation.navigate("Login");
+    else this.setState({ error: "Registration Failed" })
   }
 
   goToLogin() {
