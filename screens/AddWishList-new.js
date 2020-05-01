@@ -18,57 +18,58 @@ import Gift from '../stores/gifts';
 import User from '../stores/user'
 import NewEvent from '../stores/NewEvent'
 import { observer } from 'mobx-react';
+import { action } from 'mobx'
 // import DateTimePickerModal from "react-native-modal-datetime-picker"
 
 
-const products = [
-    {
-        name: 'Teddy Bear',
-        cost: 200,
-        collected: 120,
-        photo: require('../assets/images/p1.jpeg')
-    },
-    {
-        name: 'Sofa Set',
-        cost: 800,
-        collected: 650,
-        photo: require('../assets/images/p2.jpeg')
-    },
-    {
-        name: 'Baby Cradle',
-        cost: 150,
-        collected: 150,
-        photo: require('../assets/images/p3.jpeg')
-    },
-    {
-        name: 'Neck Pillow',
-        cost: 80,
-        collected: 20,
-        photo: require('../assets/images/p4.jpeg')
-    },
-    {
-        name: 'Baby Dress',
-        cost: 300,
-        collected: 150,
-        photo: require('../assets/images/p5.jpeg')
-    },
-    {
-        name: 'Outdoor Cradle',
-        cost: 350,
-        collected: 150,
-        photo: require('../assets/images/p1.jpeg')
-    },
-]
+// const products = [
+//     {
+//         name: 'Teddy Bear',
+//         cost: 200,
+//         collected: 120,
+//         photo: require('../assets/images/p1.jpeg')
+//     },
+//     {
+//         name: 'Sofa Set',
+//         cost: 800,
+//         collected: 650,
+//         photo: require('../assets/images/p2.jpeg')
+//     },
+//     {
+//         name: 'Baby Cradle',
+//         cost: 150,
+//         collected: 150,
+//         photo: require('../assets/images/p3.jpeg')
+//     },
+//     {
+//         name: 'Neck Pillow',
+//         cost: 80,
+//         collected: 20,
+//         photo: require('../assets/images/p4.jpeg')
+//     },
+//     {
+//         name: 'Baby Dress',
+//         cost: 300,
+//         collected: 150,
+//         photo: require('../assets/images/p5.jpeg')
+//     },
+//     {
+//         name: 'Outdoor Cradle',
+//         cost: 350,
+//         collected: 150,
+//         photo: require('../assets/images/p1.jpeg')
+//     },
+// ]
 
-const getAmount = () => {
-    let needed = 0, total = 0
-    products.map((product) => {
-        needed += product.cost - product.collected
-        total += product.cost
-    })
-    return [needed, total]
+// const getAmount = () => {
+//     let needed = 0, total = 0
+//     products.map((product) => {
+//         needed += product.cost - product.collected
+//         total += product.cost
+//     })
+//     return [needed, total]
 
-}
+// }
 
 
 
@@ -78,22 +79,26 @@ export default class NewWishListScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isModalVisible: false,
-            checked1: true,
-            checked2: false,
-            header: '',
-            eventTitle: '',
-            description: '',
-            image: null,
-            // organizers: ,
-            // contributors: 
+            loading: false
         }
     }
 
-    updateModal = (isModalVisible) => {
-        console.log(isModalVisible)
-        this.setState({ isModalVisible: isModalVisible })
+    async componentDidMount() {
+        // console.log(users)
+        // this.setState({ organizers: JSON.parse(JSON.stringify(users)), contributors: JSON.parse(JSON.stringify(users)) })
+        try {
+            console.log('Here')
+            await NewEvent.updateList()
+        } catch (err) {
+            console.log(err)
+        }
+
     }
+
+    // updateModal = (isModalVisible) => {
+    //     console.log(isModalVisible)
+    //     this.setState({ isModalVisible: isModalVisible })
+    // }
 
 
     deleteItem(id) {
@@ -160,16 +165,29 @@ export default class NewWishListScreen extends React.Component {
         )
     }
 
-    updateList(index) {
-        console.log(index, this.state)
+
+    markChecked(list, id) {
+        return list.map((user) => {
+            if (user._id == id) {
+                user.checked = !user.checked
+                return user
+            } else {
+                return user
+            }
+        })
+    }
+
+    updateList(id) {
+        console.log(id, this.state)
         if (this.state.current === 'Organizer') {
             let list = JSON.parse(JSON.stringify(NewEvent.organizers))
-            list[index].checked = !list[index].checked
+            list = this.markChecked(list, id)
+            // list[index].checked = !list[index].checked
             NewEvent.organizers = list
             // this.setState({ organizers: list })
         } else {
             let list = JSON.parse(JSON.stringify(NewEvent.contributors))
-            list[index].checked = !list[index].checked
+            list = this.markChecked(list, id)
             NewEvent.contributors = list
             // this.setState({ contributors: list })
         }
@@ -177,12 +195,12 @@ export default class NewWishListScreen extends React.Component {
 
     renderPeopleList = ({ item }) => (
         <ListItem
-            key={item.index}
+            key={item._id}
             title={item.name}
             leftAvatar={{
-                source: item.checked ? require('../assets/images/tick.png') : item.avatar_url
+                source: item.checked ? require('../assets/images/tick.png') : item.image ? { uri: item.image } : require('../assets/images/account.png')
             }}
-            onPress={() => { this.updateList(item.index) }}
+            onPress={() => { this.updateList(item._id) }}
             bottomDivider
         />
     )
@@ -256,7 +274,7 @@ export default class NewWishListScreen extends React.Component {
                             {
                                 people.map((item, index) => {
                                     return (
-                                        <Avatar key={`${header} - ${index}`} rounded source={item.avatar_url} size={48} />
+                                        <Avatar key={`${header} - ${index}`} rounded source={item.image ? { uri: item.image } : require('../assets/images/account.png')} size={48} />
                                     )
                                 })
                             }
@@ -309,10 +327,8 @@ export default class NewWishListScreen extends React.Component {
             quality: 1
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
-            NewEvent.image = result.uri
+            NewEvent.image = result
             // this.setState({ image: result.uri });
         }
     };
@@ -322,15 +338,27 @@ export default class NewWishListScreen extends React.Component {
         this.props.navigation.navigate('AddGifts')
     }
 
+    async publishEvent() {
+        this.setState({ loading: true })
+        const success = await NewEvent.publish()
+        if (success) {
+            // this.setState({ loading: false })
+            this.props.navigation.navigate('Success', { back: 'Campaign', title: "My Wishlists", text: "Success! Wishlist Created", })
+        } else {
+            // this.setState({ loading: false })
+        }
+
+    }
+
 
     getHomeScreem() {
         return (
             <View>
                 <ScrollView>
-                    {NewEvent.image ? <Tile
+                    {NewEvent.image.uri ? <Tile
                         icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
                         onPress={this.launchPicker.bind(this)}
-                        imageSrc={{ uri: NewEvent.image }}
+                        imageSrc={{ uri: NewEvent.image.uri }}
                         feature
                     /> : <Tile
                         icon={{ name: 'cloud-upload', type: 'font-awesome', size: 48, color: 'white' }}
@@ -428,6 +456,7 @@ export default class NewWishListScreen extends React.Component {
                                             start: { x: 0, y: 0.5 },
                                             end: { x: 1, y: 0.5 },
                                         }}
+                                        loading={this.state.loading}
                                         icon={
                                             <Icon
                                                 name="md-rocket"
@@ -443,7 +472,7 @@ export default class NewWishListScreen extends React.Component {
                                             marginBottom: 20
 
                                         }}
-                                    // onPress={(e) => { this.setState({ current: 'Contributor', header: 'Add Contributors' }) }}
+                                        onPress={(e) => { this.publishEvent() }}
                                     /> : null
                             }
                         </View>

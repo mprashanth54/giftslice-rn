@@ -74,6 +74,7 @@ export default class MyWishListScreen extends React.Component {
             checked1: true,
             checked2: false
         }
+        console.log(this.props.navigation)
     }
 
     updateModal = (isModalVisible) => {

@@ -86,8 +86,8 @@ export default class Profile extends React.Component {
                         // key={image}
                         rounded
                         size={128}
-                        source={this.state.image ? {
-                            uri: this.state.image
+                        source={User.info.image ? {
+                            uri: User.info.image
                         } : require('../assets/images/account.png')}
                         onPress={() => this.launchPicker()}
                     />
