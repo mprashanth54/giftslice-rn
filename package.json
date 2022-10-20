@@ -41,7 +41,7 @@
     "react-native-modal-datetime-picker": "^8.6.0",
     "react-native-progress-wheel": "^1.0.5",
     "react-native-raw-bottom-sheet": "^2.0.6",
-    "react-native-reanimated": "~1.4.0",
+    "react-native-reanimated": "~2.10.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-settings-page": "^2.0.6",
     "react-native-vector-icons": "^6.6.0",
